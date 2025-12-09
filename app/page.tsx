@@ -59,9 +59,12 @@ export default function Home() {
         {/* Logo/Header */}
         <div className="text-center mb-8">
           <div className="text-5xl mb-4">✨</div>
-          <h1 className="font-serif text-xl tracking-widest uppercase text-gray-600 mb-3">
+          <h1 className="font-serif text-xl tracking-widest uppercase text-gray-600 mb-2">
             COASTAL CELEBRATION EXPEDITION
           </h1>
+          <p className="text-xs text-gray-500 mb-4">
+            Expedition Portal • Crew Availability Assessment
+          </p>
           <div className="w-24 h-1 mx-auto mb-5" style={{ backgroundColor: '#62B6CB' }}></div>
           <h2 className="font-serif text-4xl font-bold mb-4" style={{ color: '#0A2E4D' }}>
             Dr. Ayana Elizabeth Johnson
@@ -75,8 +78,10 @@ export default function Home() {
         </div>
 
         {/* Expedition details box */}
-        <div className="border-l-4 p-5 mb-8 rounded-r-lg" style={{ backgroundColor: '#F9F7F4', borderLeftColor: '#62B6CB' }}>
-          <h3 className="font-semibold mb-3 uppercase text-xs tracking-wider" style={{ color: '#0A2E4D' }}>EXPEDITION DETAILS</h3>
+        <div className="bg-white border-l-4 border rounded-xl p-6 mb-8 shadow-sm" style={{ borderLeftColor: '#62B6CB' }}>
+          <h3 className="font-bold mb-3 uppercase text-sm tracking-wider" style={{ color: '#0A2E4D' }}>
+            Expedition Details
+          </h3>
           <p className="text-gray-700 leading-relaxed text-sm">
             Join Dr. Johnson for a coastal celebration combining ocean views,
             scientific inquiry, and fellowship. We're assembling a crew for a 4 day field study in March, 2026.
@@ -122,7 +127,7 @@ export default function Home() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full text-lg font-bold tracking-wide transition-all uppercase disabled:opacity-50 disabled:cursor-not-allowed rounded-full shadow-lg hover:shadow-xl"
+            className="w-full text-base font-bold tracking-wide transition-all uppercase disabled:opacity-50 disabled:cursor-not-allowed rounded-lg shadow-md hover:shadow-lg"
             style={{
               height: '56px',
               backgroundColor: '#0A2E4D',

@@ -4,6 +4,8 @@ import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase, type Participant, type Availability } from '@/lib/supabase';
 import CalendarGrid from '@/components/CalendarGrid';
+import CrewDashboard from '@/components/CrewDashboard';
+import TideKey from '@/components/TideKey';
 import { getAllDates, getDateKey } from '@/lib/dates';
 
 function ScheduleContent() {
@@ -170,97 +172,96 @@ function ScheduleContent() {
   const totalDates = getAllDates().length;
 
   return (
-    <div className="min-h-screen py-8 px-4 bg-white">
-      <div className="max-w-2xl mx-auto">
-
-        {/* Header */}
-        <div className="bg-white border-t-8 p-8 mb-6 text-center rounded-2xl shadow-2xl" style={{
-          borderTopColor: '#0A2E4D',
-          boxShadow: '0 25px 50px -12px rgba(10, 46, 77, 0.25)'
-        }}>
-          <div className="text-4xl mb-4">✨</div>
-          <h1 className="font-serif text-3xl mb-3" style={{ color: '#0A2E4D' }}>
+    <div className="min-h-screen py-8 px-4 bg-gray-50">
+      <div className="max-w-6xl mx-auto">
+        {/* Page header - left aligned */}
+        <div className="mb-6">
+          <h1 className="text-3xl font-serif font-bold mb-2" style={{ color: '#0A2E4D' }}>
             Expedition Availability Assessment
           </h1>
-          <p className="text-lg text-gray-700 mb-2">
-            Welcome, <span className="font-semibold">{participant.name}</span>
-          </p>
-          <p className="text-sm text-gray-600 italic mb-3">
-            We're glad you're considering joining the crew. We'll use this information to inform our final dates.
-          </p>
-          <p className="text-gray-600 max-w-xl mx-auto leading-relaxed text-sm">
-            Mark your availability for each field study date using the tide levels below.
-            Select <strong>High Tide</strong> if you're available, <strong>Mid Tide</strong> if you might be able to join, or <strong>Low Tide</strong> if you're unavailable.
+          <p className="text-sm text-gray-600">
+            Expedition Portal • Crew Availability Assessment
           </p>
         </div>
 
-        {/* Progress bar */}
-        <div className="bg-white p-5 mb-6 rounded-xl shadow-md border-l-4" style={{ borderLeftColor: '#62B6CB' }}>
-          <div className="flex justify-between items-center mb-3">
-            <span className="text-gray-700 font-medium text-sm">
-              <span className="text-xl font-bold" style={{ color: '#0A2E4D' }}>{completedDates}</span> of {totalDates} dates assessed
-            </span>
-            <span className="text-xs font-semibold px-3 py-1 rounded-full" style={{ backgroundColor: '#F9D949', color: '#0A2E4D' }}>
-              {Math.round((completedDates/totalDates)*100)}%
-            </span>
-          </div>
-          <div className="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden">
-            <div
-              className="h-2.5 rounded-full transition-all duration-500 ease-out"
-              style={{
-                width: `${(completedDates/totalDates)*100}%`,
-                background: 'linear-gradient(90deg, #0A2E4D 0%, #62B6CB 100%)'
-              }}
-            ></div>
-          </div>
-        </div>
-
-        {/* Availability Grid */}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-10">
-            <CalendarGrid
-              availability={availability}
-              onStatusChange={handleStatusChange}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Main content area */}
+          <div className="lg:col-span-2">
+            {/* Crew Dashboard */}
+            <CrewDashboard
+              crewMemberName={participant.name}
+              datesAssessed={completedDates}
+              totalDates={totalDates}
             />
+
+            {/* Availability Grid */}
+            <form onSubmit={handleSubmit}>
+              <div className="mb-6">
+                <CalendarGrid
+                  availability={availability}
+                  onStatusChange={handleStatusChange}
+                />
+              </div>
+
+              {error && (
+                <div className="bg-red-50 border-l-4 border-red-600 text-red-700 px-5 py-4 mb-6 rounded-xl">
+                  {error}
+                </div>
+              )}
+
+              {/* Submit button */}
+              <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 text-center">
+                <button
+                  type="submit"
+                  disabled={saving || completedDates !== totalDates}
+                  className="w-full max-w-md h-14 text-base font-semibold tracking-wide uppercase transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-lg shadow-md hover:shadow-lg"
+                  style={{
+                    backgroundColor: completedDates === totalDates ? '#0A2E4D' : '#D1D5DB',
+                    color: completedDates === totalDates ? '#FFFFFF' : '#6B7280'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (completedDates === totalDates && !saving) {
+                      e.currentTarget.style.backgroundColor = '#1B4965';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (completedDates === totalDates && !saving) {
+                      e.currentTarget.style.backgroundColor = '#0A2E4D';
+                    }
+                  }}
+                >
+                  {saving ? 'Submitting Assessment...' : 'Submit Expedition Application →'}
+                </button>
+                {completedDates !== totalDates && (
+                  <p className="text-xs text-gray-600 mt-3">
+                    Please assess all {totalDates - completedDates} remaining dates to continue
+                  </p>
+                )}
+              </div>
+            </form>
           </div>
 
-          {error && (
-            <div className="bg-red-50 border-l-4 border-red-600 text-red-700 px-5 py-4 mb-6 rounded-r-lg">
-              {error}
+          {/* Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-8">
+              <TideKey />
+
+              {/* Additional info card */}
+              <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-5">
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-3" style={{ color: '#0A2E4D' }}>
+                  About This Assessment
+                </h3>
+                <p className="text-xs text-gray-600 leading-relaxed mb-3">
+                  We're glad you're considering joining the crew. We'll use this information to inform our final dates.
+                </p>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Tide times are based on NOAA predictions for Port Maria, Jamaica.
+                  Use the filters to view specific availability categories.
+                </p>
+              </div>
             </div>
-          )}
-
-          {/* Submit button */}
-          <div className="bg-white p-6 rounded-xl shadow-md text-center">
-            <button
-              type="submit"
-              disabled={saving || completedDates !== totalDates}
-              className="w-full max-w-sm h-14 text-base font-semibold tracking-wide uppercase transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-full shadow-lg hover:shadow-xl"
-              style={{
-                backgroundColor: completedDates === totalDates ? '#0A2E4D' : '#D1D5DB',
-                color: completedDates === totalDates ? '#FFFFFF' : '#6B7280'
-              }}
-              onMouseEnter={(e) => {
-                if (completedDates === totalDates && !saving) {
-                  e.currentTarget.style.backgroundColor = '#1B4965';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (completedDates === totalDates && !saving) {
-                  e.currentTarget.style.backgroundColor = '#0A2E4D';
-                }
-              }}
-            >
-              {saving ? 'Submitting Assessment...' : 'Submit Expedition Application →'}
-            </button>
-            {completedDates !== totalDates && (
-              <p className="text-xs text-gray-600 mt-3 italic">
-                Please assess all {totalDates - completedDates} remaining dates to continue
-              </p>
-            )}
           </div>
-        </form>
-
+        </div>
       </div>
     </div>
   );
