@@ -1,6 +1,6 @@
-// Date range: March 6-22, 2026
+// Date range: March 6-22, 2028
 // Using year, month (0-indexed), day to avoid timezone issues
-const START_YEAR = 2026;
+const START_YEAR = 2028;
 const START_MONTH = 2; // March (0-indexed)
 const START_DAY = 6;
 const END_DAY = 22;

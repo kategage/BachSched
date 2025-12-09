@@ -6,25 +6,20 @@
 
 :root {
   /* Primary */
-  --deep-navy: #05324F;
+  --deep-ocean: #0A2E4D;
   --black: #000000;
   --white: #FFFFFF;
   --cream: #F9F7F4;
 
-  /* Expedition Palette */
-  --seafoam: #B7E3E0;
-  --sand-beige: #F3E9D2;
-  --soft-gold: #E3A534;
-
-  /* Legacy - for compatibility */
-  --deep-ocean: #05324F;
-  --sunshine-yellow: #E3A534;
+  /* Accents */
+  --sunshine-yellow: #F9D949;
   --ocean-mid: #1B4965;
   --ocean-light: #62B6CB;
+  --coral-accent: #FF6B6B;
 
   /* Tide states */
-  --high-tide: #B7E3E0;
-  --mid-tide: #F7E7A0;
+  --high-tide: #0A2E4D;
+  --mid-tide: #F9D949;
   --low-tide: #E5E5E5;
 }
 
