@@ -67,10 +67,9 @@ export default function DateCard({
             onClick={() => onStatusChange('yes')}
             className={`group relative rounded-xl p-6 transition-all duration-200 ${
               selectedChoice === 'yes'
-                ? 'bg-gradient-to-br from-blue-900 to-blue-800 text-white shadow-lg scale-105 ring-4'
+                ? 'bg-gradient-to-br from-blue-900 to-blue-800 text-white shadow-lg scale-105 ring-4 ring-yellow-400'
                 : 'bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 hover:border-blue-400 hover:scale-102'
             }`}
-            style={selectedChoice === 'yes' ? { ringColor: '#F9D949' } : {}}
           >
             <div className="text-center">
               <div className="text-4xl mb-2">🌊</div>
@@ -92,10 +91,9 @@ export default function DateCard({
             onClick={() => onStatusChange('maybe')}
             className={`group relative rounded-xl p-6 transition-all duration-200 ${
               selectedChoice === 'maybe'
-                ? 'bg-gradient-to-br from-yellow-400 to-yellow-500 text-gray-900 shadow-lg scale-105 ring-4'
+                ? 'bg-gradient-to-br from-yellow-400 to-yellow-500 text-gray-900 shadow-lg scale-105 ring-4 ring-blue-900'
                 : 'bg-gradient-to-br from-yellow-50 to-yellow-100 text-gray-800 border-2 border-yellow-200 hover:border-yellow-400 hover:scale-102'
             }`}
-            style={selectedChoice === 'maybe' ? { ringColor: '#0A2E4D' } : {}}
           >
             <div className="text-center">
               <div className="text-4xl mb-2">〰️</div>
