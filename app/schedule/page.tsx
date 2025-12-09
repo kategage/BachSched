@@ -174,14 +174,14 @@ function ScheduleContent() {
       <div className="portal-card animate-fade-in" style={{ maxHeight: '90vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         {/* Header */}
         <div className="text-center mb-6">
-          <div className="text-5xl mb-3">✨🌺✨</div>
-          <h1 className="font-display font-bold text-2xl mb-2" style={{ color: '#14B8A6' }}>
+          <div className="text-6xl mb-3">✨🌺✨</div>
+          <h1 className="font-display font-bold text-3xl mb-2 bg-gradient-to-r from-teal-600 to-orange-500 bg-clip-text text-transparent">
             Hi {participant.name}!
           </h1>
-          <p className="text-gray-600 text-base font-semibold">
+          <p className="text-gray-700 text-lg font-bold">
             When can you make it? 🌴
           </p>
-          <p className="text-gray-500 text-sm mt-1">
+          <p className="text-gray-600 text-sm mt-2">
             Select your availability for each day below
           </p>
         </div>

@@ -51,32 +51,29 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="portal-card animate-fade-in text-center">
-        {/* Big emoji group at top */}
-        <div className="text-6xl mb-6">✨🌴✨</div>
+      <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-lg w-full">
+        {/* Larger emoji header */}
+        <div className="text-7xl text-center mb-4">✨🌴✨</div>
 
         {/* Main heading */}
-        <h1 className="text-lg tracking-widest text-gray-500 mb-2 font-semibold">
+        <h1 className="text-4xl font-bold text-center mb-2 text-gray-800">
           WELCOME TO
         </h1>
-        <h2 className="font-display font-bold text-4xl md:text-5xl mb-4" style={{ color: '#14B8A6' }}>
+        <h2 className="text-5xl font-bold text-center mb-6 bg-gradient-to-r from-teal-600 to-orange-500 bg-clip-text text-transparent">
           AYANA'S BACHELORETTE
         </h2>
 
         {/* Subheading */}
-        <p className="text-lg font-bold mb-8" style={{ color: '#FB923C' }}>
+        <p className="text-xl text-center mb-8 text-orange-500 font-bold">
           🌊 Beach Getaway • March 6-22, 2026 ☀️
         </p>
 
-        {/* Wave divider */}
-        <div className="text-4xl mb-8">🌺</div>
-
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="text-left">
+          <div className="space-y-2">
             <label
               htmlFor="name"
-              className="block text-lg font-bold text-gray-700 mb-3"
+              className="block text-lg font-bold text-gray-700"
             >
               Your Name
             </label>
@@ -85,10 +82,11 @@ export default function Home() {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 border-2 rounded-xl focus:outline-none focus:ring-4 text-gray-900 text-lg placeholder:text-gray-400 transition-all"
+              className="w-full px-5 text-lg rounded-2xl border-3 focus:outline-none focus:ring-4 text-gray-900 placeholder:text-gray-400 transition-all"
               style={{
-                borderColor: '#14B8A6',
-                height: '56px'
+                height: '64px',
+                borderWidth: '3px',
+                borderColor: '#14B8A6'
               }}
               placeholder="Enter your full name"
               disabled={loading}
@@ -104,10 +102,10 @@ export default function Home() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full text-white font-bold rounded-xl hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-lg"
+            className="w-full text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xl"
             style={{
-              backgroundColor: '#14B8A6',
-              height: '56px'
+              height: '64px',
+              background: 'linear-gradient(to right, #14B8A6, #0D9488)'
             }}
           >
             {loading ? (
@@ -119,16 +117,16 @@ export default function Home() {
                 Loading...
               </span>
             ) : (
-              "Let's Go! →"
+              "Let's Go! 🏖️"
             )}
           </button>
         </form>
 
         {/* Big tropical emojis at bottom */}
-        <div className="text-5xl mt-8">🏖️✨🍹</div>
+        <div className="text-5xl text-center mt-8">🌺✨🍹</div>
 
         {/* Admin link */}
-        <div className="mt-6">
+        <div className="mt-6 text-center">
           <a
             href="/admin"
             className="text-xs text-gray-400 hover:text-teal-500 transition-colors"
