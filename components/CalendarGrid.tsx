@@ -18,21 +18,21 @@ export default function CalendarGrid({
     const isSelected = currentStatus === status;
 
     const baseClass =
-      'min-h-[48px] px-5 py-3 rounded-lg font-medium text-sm transition-all duration-200 border-3 touch-manipulation flex-1';
+      'min-h-[48px] px-5 py-3 rounded-lg font-semibold transition-all duration-200 border-2 touch-manipulation flex-1';
 
     if (isSelected) {
       if (status === 'yes') {
-        return `${baseClass} bg-primary text-white border-primary scale-105 shadow-sm`;
+        return `${baseClass} bg-[#14B8A6] text-white border-[#14B8A6]`;
       }
       if (status === 'maybe') {
-        return `${baseClass} bg-warning text-gray-900 border-warning scale-105 shadow-sm`;
+        return `${baseClass} bg-[#FCD34D] text-gray-900 border-[#FCD34D]`;
       }
       if (status === 'no') {
-        return `${baseClass} bg-muted text-gray-700 border-muted scale-105 shadow-sm`;
+        return `${baseClass} bg-[#FB7185] text-white border-[#FB7185]`;
       }
     }
 
-    return `${baseClass} bg-white text-gray-600 border-gray-200 hover:border-gray-300 hover:bg-gray-50`;
+    return `${baseClass} bg-white text-gray-600 border-[#E5E7EB] hover:border-gray-400 hover:bg-gray-50`;
   };
 
   return (

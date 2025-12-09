@@ -52,38 +52,37 @@ export default function Home() {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="w-full max-w-2xl animate-fade-in">
-        {/* Clean Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <span className="text-2xl">🌴</span>
-            <h1 className="font-display font-bold text-5xl md:text-6xl text-gray-900 tracking-tight">
+        {/* Tropical Header */}
+        <div className="text-center mb-10">
+          <div className="bg-gradient-to-r from-[#14B8A6] to-[#FB7185] rounded-2xl p-8 mb-8 shadow-lg">
+            <h1 className="font-display font-bold text-4xl md:text-5xl text-white mb-3">
               Ayana's Bachelorette
             </h1>
+            <p className="text-white/90 text-lg">
+              Help us plan the perfect beach celebration! 🌴
+            </p>
           </div>
-          <p className="text-lg text-gray-600 max-w-lg mx-auto">
-            Help us plan the perfect celebration by sharing your availability
-          </p>
         </div>
 
-        <div className="bg-white rounded-xl p-8 md:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
+        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
           {/* Date Range Info */}
-          <div className="mb-8 p-4 bg-gray-50 rounded-lg">
+          <div className="mb-10 p-5 bg-gradient-to-r from-[#14B8A6]/10 to-[#FB7185]/10 rounded-xl border-2 border-[#14B8A6]/20">
             <div className="flex items-center justify-center gap-2">
-              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-[#14B8A6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <p className="font-semibold text-gray-900">
+              <p className="font-bold text-gray-900 text-lg">
                 March 6-22, 2025
               </p>
             </div>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="max-w-md mx-auto">
               <label
                 htmlFor="name"
-                className="block text-sm font-semibold text-gray-900 mb-2"
+                className="block text-xl font-bold text-gray-900 mb-3"
               >
                 Your Name
               </label>
@@ -92,41 +91,45 @@ export default function Home() {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
+                className="w-full h-14 px-4 border-2 border-[#14B8A6] rounded-xl focus:outline-none focus:ring-4 focus:ring-[#14B8A6]/30 text-gray-900 text-lg placeholder:text-gray-400 transition-all"
                 placeholder="Enter your name"
                 disabled={loading}
+                style={{ minHeight: '56px', fontSize: '18px', padding: '16px' }}
               />
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+              <div className="bg-red-50 border-2 border-red-300 text-red-700 px-5 py-4 rounded-xl text-sm font-medium max-w-md mx-auto">
                 {error}
               </div>
             )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-primary text-white font-semibold py-4 px-6 rounded-lg hover:bg-primary/90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
-            >
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Loading...
-                </span>
-              ) : (
-                'Continue to Calendar'
-              )}
-            </button>
+            <div className="max-w-md mx-auto">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full h-14 bg-[#14B8A6] text-white font-bold rounded-xl hover:bg-[#0D9488] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-lg"
+                style={{ minHeight: '56px' }}
+              >
+                {loading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Loading...
+                  </span>
+                ) : (
+                  'Continue to Calendar'
+                )}
+              </button>
+            </div>
           </form>
 
           {/* Info */}
-          <div className="mt-6 text-center">
+          <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
-              You'll receive a unique link to edit your availability anytime
+              ✨ You'll get a unique link to update your availability anytime
             </p>
           </div>
         </div>
@@ -135,7 +138,7 @@ export default function Home() {
         <div className="text-center mt-6">
           <a
             href="/admin"
-            className="text-sm text-gray-600 hover:text-primary transition-colors"
+            className="text-sm text-gray-600 hover:text-[#14B8A6] transition-colors font-medium"
           >
             Admin Dashboard →
           </a>
