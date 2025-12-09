@@ -89,10 +89,17 @@ export default function Home() {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full h-14 px-4 text-lg border-2 border-gray-300 rounded-md transition-all focus:outline-none focus:ring-2 focus:ring-opacity-50"
+              className="w-full h-14 px-4 text-lg border-2 rounded-md transition-all focus:outline-none focus:ring-2 focus:ring-opacity-50"
               style={{
-                borderColor: name ? '#05324F' : '#D1D5DB',
-                focusRingColor: '#B7E3E0'
+                borderColor: name ? '#05324F' : '#D1D5DB'
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = '#05324F';
+                e.target.style.boxShadow = '0 0 0 3px rgba(183, 227, 224, 0.3)';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = name ? '#05324F' : '#D1D5DB';
+                e.target.style.boxShadow = 'none';
               }}
               placeholder="Enter your full name"
               disabled={loading}
