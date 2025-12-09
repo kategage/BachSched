@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase, type Participant, type Availability } from '@/lib/supabase';
 import CrewSummaryPanel from '@/components/CrewSummaryPanel';
 import DateCard from '@/components/DateCard';
+import TideLegend from '@/components/TideLegend';
 import { getAllDates, getDateKey, formatDisplayDate } from '@/lib/dates';
 
 type FilterType = 'all' | 'high' | 'mid' | 'unassessed';
@@ -21,7 +22,6 @@ function ScheduleContent() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
-  const [showTideInfo, setShowTideInfo] = useState(true);
   const [filter, setFilter] = useState<FilterType>('all');
 
   useEffect(() => {
@@ -149,7 +149,7 @@ function ScheduleContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
         <div className="text-center animate-fade-in">
           <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#0A2E4D' }} viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
@@ -163,7 +163,7 @@ function ScheduleContent() {
 
   if (!participant) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
         <div className="text-center">
           <p className="text-slate-700 font-semibold">Participant not found</p>
         </div>
@@ -188,8 +188,8 @@ function ScheduleContent() {
   });
 
   return (
-    <div className="min-h-screen py-8 px-4 bg-slate-50">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4">
+      <div className="max-w-5xl mx-auto">
         {/* Crew Summary Panel */}
         <CrewSummaryPanel
           crewMemberName={participant.name}
@@ -199,25 +199,8 @@ function ScheduleContent() {
           onFilterChange={setFilter}
         />
 
-        {/* Field Conditions toggle */}
-        <div className="mb-6 flex justify-end">
-          <button
-            type="button"
-            onClick={() => setShowTideInfo(!showTideInfo)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all shadow-sm ${
-              showTideInfo
-                ? 'bg-sky-100 border-2 hover:bg-sky-200'
-                : 'bg-white border-2 border-slate-300 hover:border-slate-400'
-            }`}
-            style={{
-              borderColor: showTideInfo ? '#62B6CB' : undefined,
-              color: '#0A2E4D'
-            }}
-          >
-            <span className="text-sm">{showTideInfo ? '▼' : '▶'}</span>
-            <span>Field Conditions</span>
-          </button>
-        </div>
+        {/* Tide Legend */}
+        <TideLegend />
 
         {/* Date Cards */}
         <form onSubmit={handleSubmit}>
@@ -238,7 +221,6 @@ function ScheduleContent() {
                   fieldDayNumber={index + 1}
                   selectedChoice={selectedChoice}
                   onStatusChange={(status) => handleStatusChange(dateKey, status)}
-                  showTideInfo={showTideInfo}
                 />
               );
             })}
@@ -256,19 +238,20 @@ function ScheduleContent() {
             </div>
           )}
 
-          {/* Submit button */}
-          <div className="rounded-2xl bg-white shadow-sm border border-slate-200 p-6 text-center">
+          {/* Submit Card */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
             <button
               type="submit"
               disabled={saving || completedDates !== totalDates}
-              className="w-full max-w-md h-14 text-base font-bold tracking-wide uppercase transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-lg shadow-md hover:shadow-lg"
-              style={{
-                backgroundColor: completedDates === totalDates ? '#0A2E4D' : '#D1D5DB',
-                color: completedDates === totalDates ? '#FFFFFF' : '#6B7280'
-              }}
+              className={`w-full max-w-md h-16 text-lg font-bold uppercase tracking-wide rounded-lg transition-all ${
+                completedDates === totalDates
+                  ? 'shadow-lg hover:shadow-xl'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+              style={completedDates === totalDates ? { backgroundColor: '#0A2E4D', color: 'white' } : {}}
               onMouseEnter={(e) => {
                 if (completedDates === totalDates && !saving) {
-                  e.currentTarget.style.backgroundColor = '#1B4965';
+                  e.currentTarget.style.backgroundColor = '#000000';
                 }
               }}
               onMouseLeave={(e) => {
@@ -277,13 +260,8 @@ function ScheduleContent() {
                 }
               }}
             >
-              {saving ? 'Submitting Assessment...' : 'Submit Expedition Application →'}
+              {saving ? 'Submitting Assessment...' : (completedDates === totalDates ? 'Submit Assessment →' : `Complete ${totalDates - completedDates} More Dates`)}
             </button>
-            {completedDates !== totalDates && (
-              <p className="text-xs text-slate-600 mt-3">
-                Please assess all {totalDates - completedDates} remaining dates to continue
-              </p>
-            )}
           </div>
         </form>
       </div>
@@ -295,7 +273,7 @@ export default function SchedulePage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
           <div className="text-center animate-fade-in">
             <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#0A2E4D' }} viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>

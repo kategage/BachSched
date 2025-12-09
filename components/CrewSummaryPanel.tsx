@@ -25,101 +25,103 @@ export default function CrewSummaryPanel({
   const crewTitle = getCrewTitleForName(crewMemberName);
 
   return (
-    <div className="rounded-2xl bg-white shadow-sm border border-slate-200 px-6 py-6 mb-6">
-      {/* Page title */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-1" style={{ color: '#0A2E4D' }}>
-          Expedition Availability Assessment
-        </h1>
-        <p className="text-sm text-slate-600">
-          Expedition Portal • Crew Availability Assessment
-        </p>
-      </div>
+    <>
+      {/* Header Card */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+        <div className="flex items-start justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white text-xl" style={{ backgroundColor: '#0A2E4D' }}>
+              🌊
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold" style={{ color: '#0A2E4D' }}>
+                Expedition Availability Assessment
+              </h1>
+              <p className="text-gray-500">{crewMemberName} • March 6-22, 2026</p>
+            </div>
+          </div>
+        </div>
 
-      {/* Crew info grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div className="space-y-3">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
+        {/* Crew Member Info - 3 Column Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-blue-50 rounded-lg p-4">
+            <p className="text-xs uppercase tracking-wide text-blue-900 font-semibold mb-1">
               Crew Member
-            </div>
-            <div className="text-lg font-bold" style={{ color: '#0A2E4D' }}>
+            </p>
+            <p className="text-lg font-semibold" style={{ color: '#0A2E4D' }}>
               {crewMemberName}
-            </div>
+            </p>
           </div>
-
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
+          <div className="bg-blue-50 rounded-lg p-4">
+            <p className="text-xs uppercase tracking-wide text-blue-900 font-semibold mb-1">
               Crew Title
-            </div>
-            <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-sky-100 text-sm font-bold" style={{ color: '#0A2E4D' }}>
+            </p>
+            <p className="text-lg font-semibold" style={{ color: '#0A2E4D' }}>
               {crewTitle}
-            </div>
+            </p>
           </div>
-        </div>
-
-        <div className="space-y-3">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
+          <div className="bg-blue-50 rounded-lg p-4">
+            <p className="text-xs uppercase tracking-wide text-blue-900 font-semibold mb-1">
               Expedition
-            </div>
-            <div className="text-base font-semibold" style={{ color: '#0A2E4D' }}>
-              Coastal Celebration Expedition
-            </div>
-          </div>
-
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
-              Assessment Progress
-            </div>
-            <div className="text-base font-bold" style={{ color: '#0A2E4D' }}>
-              {percentComplete}% • {datesAssessed} of {totalDates} dates
-            </div>
+            </p>
+            <p className="text-lg font-semibold" style={{ color: '#0A2E4D' }}>
+              Coastal Celebration
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Progress bar */}
-      <div className="mb-6">
-        <div className="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+      {/* Progress Card */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <p className="text-sm text-gray-500 uppercase tracking-wide font-semibold mb-1">
+              Assessment Progress
+            </p>
+            <p className="text-3xl font-bold" style={{ color: '#0A2E4D' }}>
+              {datesAssessed} <span className="text-lg text-gray-500 font-normal">of {totalDates} dates</span>
+            </p>
+          </div>
+          <div className="text-right">
+            <p className="text-4xl font-bold" style={{ color: '#F9D949' }}>
+              {percentComplete}%
+            </p>
+          </div>
+        </div>
+        <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
           <div
-            className="h-2.5 rounded-full transition-all duration-500"
+            className="h-full transition-all duration-500 rounded-full"
             style={{
               width: `${percentComplete}%`,
-              background: 'linear-gradient(90deg, #0A2E4D 0%, #62B6CB 100%)'
+              background: 'linear-gradient(to right, #0A2E4D, #F9D949)'
             }}
           />
         </div>
       </div>
 
-      {/* Filter chips */}
-      <div>
-        <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
-          Filter Dates
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {[
-            { key: 'all' as const, label: 'All Dates' },
-            { key: 'high' as const, label: 'High Tide Only' },
-            { key: 'mid' as const, label: 'Mid Tide Only' },
-            { key: 'unassessed' as const, label: 'Unassessed' }
-          ].map(({ key, label }) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => onFilterChange(key)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                filterType === key
-                  ? 'text-white shadow-md'
-                  : 'bg-white text-slate-700 border border-slate-300 hover:border-slate-400'
-              }`}
-              style={filterType === key ? { backgroundColor: '#0A2E4D' } : {}}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+      {/* Filter buttons */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {[
+          { key: 'all' as const, label: 'All Dates' },
+          { key: 'high' as const, label: 'High Tide Only' },
+          { key: 'mid' as const, label: 'Mid Tide Only' },
+          { key: 'unassessed' as const, label: 'Unassessed' }
+        ].map(({ key, label }) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => onFilterChange(key)}
+            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
+              filterType === key
+                ? 'text-white shadow-md'
+                : 'bg-white border border-gray-200 hover:bg-gray-50'
+            }`}
+            style={filterType === key ? { backgroundColor: '#0A2E4D' } : {}}
+          >
+            {label}
+          </button>
+        ))}
       </div>
-    </div>
+    </>
   );
 }
