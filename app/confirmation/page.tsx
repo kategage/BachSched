@@ -53,21 +53,21 @@ function ConfirmationContent() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="portal-card animate-fade-in text-center">
+      <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-lg w-full animate-fade-in text-center">
         {/* Big sparkles emoji */}
-        <div className="text-6xl mb-4">✨🎉✨</div>
+        <div className="text-7xl mb-4">✨🎉✨</div>
 
         {/* Success heading */}
-        <h1 className="font-display font-bold text-4xl mb-4" style={{ color: '#10B981' }}>
+        <h1 className="font-display font-bold text-5xl mb-4 bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
           Success!
         </h1>
 
         {/* Thank you message */}
-        <p className="text-gray-700 text-lg font-semibold mb-2">
+        <p className="text-gray-700 text-xl font-bold mb-2">
           Thanks for responding{participant?.name ? `, ${participant.name}` : ''}! 🌺
         </p>
 
-        <p className="text-gray-600 text-base mb-8">
+        <p className="text-gray-600 text-lg mb-8">
           Your availability has been saved for Ayana's beach bachelorette.
         </p>
 
@@ -101,7 +101,7 @@ function ConfirmationContent() {
         </a>
 
         {/* Big tropical emojis at bottom */}
-        <div className="text-5xl mt-8">🌴🏖️🌊</div>
+        <div className="text-6xl mt-8">🌴🏖️🌊</div>
       </div>
     </div>
   );
