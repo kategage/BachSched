@@ -73,7 +73,10 @@ export default function Home() {
             Potential Expedition Dates: March 6th–22nd 2026
           </p>
           <p className="text-sm text-gray-500 italic">
-            Tentative Location: Jamaica ✨
+            Site under consideration: North Shore of Jamaica
+          </p>
+          <p className="text-xs text-gray-400 mt-1">
+            18.4115° N, 76.9424° W
           </p>
         </div>
 
@@ -83,9 +86,7 @@ export default function Home() {
             Expedition Details
           </h3>
           <p className="text-gray-700 leading-relaxed text-sm">
-            Join Dr. Johnson for a coastal celebration combining ocean views,
-            scientific inquiry, and fellowship. We're assembling a crew for a 4 day field study in March, 2026.
-            Help us identify the ideal conditions for this expedition.
+            Join Dr. Johnson and Colleagues for a coastal celebration combining ocean views, scientific inquiry, and fellowship. We're assembling a crew for a 3-4 day field study in March, 2026. Help us identify the ideal conditions for this expedition. Site under consideration: North Shore of Jamaica, 18.4115° N, 76.9424° W
           </p>
         </div>
 
