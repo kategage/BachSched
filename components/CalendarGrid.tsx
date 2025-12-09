@@ -14,39 +14,47 @@ export default function CalendarGrid({
   const dates = getAllDates();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {dates.map((date) => {
-        const dateKey = getDateKey(date); // Unique key like "2026-03-06"
-        const displayDate = formatDisplayDate(date); // "Friday, March 6"
-        const selectedChoice = availability[dateKey]; // Current selection for THIS date only
+        const dateKey = getDateKey(date);
+        const displayDate = formatDisplayDate(date);
+        const selectedChoice = availability[dateKey];
 
         return (
           <div
             key={dateKey}
-            className="bg-gradient-to-r from-teal-50 to-orange-50 rounded-2xl p-5 border-2 border-teal-200 shadow-sm"
+            className="bg-gradient-to-br from-cyan-50 via-teal-50 to-orange-50 rounded-3xl p-4 border-2 border-teal-300 shadow-lg hover:shadow-xl transition-shadow"
           >
-            {/* Date Header */}
-            <div className="mb-3">
+            {/* Date Header with emoji */}
+            <div className="mb-3 flex items-center justify-between">
               <p className="font-bold text-lg text-gray-800">
                 {displayDate}
               </p>
+              <span className="text-2xl">
+                {selectedChoice === 'yes' ? '✨' : selectedChoice === 'maybe' ? '🤔' : selectedChoice === 'no' ? '🌊' : '🏖️'}
+              </span>
             </div>
 
-            {/* Status Buttons - Horizontal */}
-            <div className="flex gap-3">
+            {/* Status Buttons - Horizontal with vibrant colors */}
+            <div className="flex gap-2">
               {/* YES Button */}
               <button
                 type="button"
                 onClick={() => onStatusChange(dateKey, 'yes')}
                 className={`
-                  flex-1 py-4 px-6 rounded-full font-bold text-base transition-all duration-200 shadow-md
+                  flex-1 py-3 px-4 rounded-full font-bold text-base transition-all duration-300 shadow-md
                   ${selectedChoice === 'yes'
-                    ? 'bg-emerald-500 text-white transform scale-105 shadow-lg'
-                    : 'bg-white border-2 border-gray-300 text-gray-600 hover:shadow-lg hover:scale-102'
+                    ? 'bg-gradient-to-r from-emerald-400 to-teal-500 text-white transform scale-105 shadow-2xl ring-2 ring-emerald-300'
+                    : 'bg-white border-3 border-emerald-300 text-gray-700 hover:shadow-xl hover:scale-105 hover:border-emerald-400'
                   }
                 `}
+                style={{
+                  borderWidth: selectedChoice !== 'yes' ? '3px' : '0'
+                }}
               >
-                {selectedChoice === 'yes' ? '✓ Yes' : 'Yes'}
+                <span className="text-lg">
+                  {selectedChoice === 'yes' ? '✓ Yes! 🎉' : 'Yes'}
+                </span>
               </button>
 
               {/* MAYBE Button */}
@@ -54,14 +62,19 @@ export default function CalendarGrid({
                 type="button"
                 onClick={() => onStatusChange(dateKey, 'maybe')}
                 className={`
-                  flex-1 py-4 px-6 rounded-full font-bold text-base transition-all duration-200 shadow-md
+                  flex-1 py-3 px-4 rounded-full font-bold text-base transition-all duration-300 shadow-md
                   ${selectedChoice === 'maybe'
-                    ? 'bg-amber-400 text-gray-900 transform scale-105 shadow-lg'
-                    : 'bg-white border-2 border-gray-300 text-gray-600 hover:shadow-lg hover:scale-102'
+                    ? 'bg-gradient-to-r from-amber-300 to-orange-400 text-gray-900 transform scale-105 shadow-2xl ring-2 ring-amber-300'
+                    : 'bg-white border-3 border-amber-300 text-gray-700 hover:shadow-xl hover:scale-105 hover:border-amber-400'
                   }
                 `}
+                style={{
+                  borderWidth: selectedChoice !== 'maybe' ? '3px' : '0'
+                }}
               >
-                {selectedChoice === 'maybe' ? '~ Maybe' : 'Maybe'}
+                <span className="text-lg">
+                  {selectedChoice === 'maybe' ? '🤔 Maybe' : 'Maybe'}
+                </span>
               </button>
 
               {/* NO Button */}
@@ -69,14 +82,19 @@ export default function CalendarGrid({
                 type="button"
                 onClick={() => onStatusChange(dateKey, 'no')}
                 className={`
-                  flex-1 py-4 px-6 rounded-full font-bold text-base transition-all duration-200 shadow-md
+                  flex-1 py-3 px-4 rounded-full font-bold text-base transition-all duration-300 shadow-md
                   ${selectedChoice === 'no'
-                    ? 'bg-rose-400 text-white transform scale-105 shadow-lg'
-                    : 'bg-white border-2 border-gray-300 text-gray-600 hover:shadow-lg hover:scale-102'
+                    ? 'bg-gradient-to-r from-rose-400 to-pink-500 text-white transform scale-105 shadow-2xl ring-2 ring-rose-300'
+                    : 'bg-white border-3 border-rose-300 text-gray-700 hover:shadow-xl hover:scale-105 hover:border-rose-400'
                   }
                 `}
+                style={{
+                  borderWidth: selectedChoice !== 'no' ? '3px' : '0'
+                }}
               >
-                {selectedChoice === 'no' ? '✗ No' : 'No'}
+                <span className="text-lg">
+                  {selectedChoice === 'no' ? '✗ No' : 'No'}
+                </span>
               </button>
             </div>
           </div>

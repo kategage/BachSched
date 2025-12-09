@@ -1,21 +1,29 @@
 // Date range: March 6-22, 2026
-export const START_DATE = new Date('2026-03-06');
-export const END_DATE = new Date('2026-03-22');
+// Using year, month (0-indexed), day to avoid timezone issues
+const START_YEAR = 2026;
+const START_MONTH = 2; // March (0-indexed)
+const START_DAY = 6;
+const END_DAY = 22;
 
 export function getAllDates(): Date[] {
   const dates: Date[] = [];
-  const current = new Date(START_DATE);
 
-  while (current <= END_DATE) {
-    dates.push(new Date(current));
-    current.setDate(current.getDate() + 1);
+  // Create dates from March 6 to March 22, 2026
+  for (let day = START_DAY; day <= END_DAY; day++) {
+    // Create date at noon local time to avoid any timezone edge cases
+    const date = new Date(START_YEAR, START_MONTH, day, 12, 0, 0);
+    dates.push(date);
   }
 
   return dates;
 }
 
 export function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0];
+  // Use local date components to create consistent key
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 export function formatDisplayDate(date: Date): string {

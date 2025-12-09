@@ -59,6 +59,19 @@ body {
   animation: fadeIn 0.4s ease-out;
 }
 
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounceSlow 2s ease-in-out infinite;
+}
+
 /* Custom focus styles */
 *:focus-visible {
   outline: 2px solid var(--primary-teal);
