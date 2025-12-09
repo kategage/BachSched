@@ -7,18 +7,14 @@ import { supabase, type Participant } from '@/lib/supabase';
 function ConfirmationContent() {
   const searchParams = useSearchParams();
   const uniqueId = searchParams.get('id');
-
   const [participant, setParticipant] = useState<Participant | null>(null);
-  const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const shareUrl =
-    typeof window !== 'undefined'
-      ? `${window.location.origin}/schedule?id=${uniqueId}`
-      : '';
-
   useEffect(() => {
-    if (!uniqueId) return;
+    if (!uniqueId) {
+      window.location.href = '/';
+      return;
+    }
 
     loadParticipant();
   }, [uniqueId]);
@@ -41,91 +37,74 @@ function ConfirmationContent() {
     }
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(shareUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center animate-fade-in">
-          <svg className="animate-spin h-8 w-8 text-[#14B8A6] mx-auto mb-4" viewBox="0 0 24 24">
+          <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#14B8A6' }} viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          <p className="text-gray-600">Loading...</p>
+          <p className="text-white font-semibold">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
-      <div className="w-full max-w-2xl animate-fade-in">
-        <div className="bg-white rounded-2xl p-8 md:p-10 shadow-lg text-center">
-          {/* Success Icon */}
-          <div className="w-16 h-16 mx-auto mb-6 bg-[#14B8A6]/10 rounded-full flex items-center justify-center">
-            <svg className="w-8 h-8 text-[#14B8A6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="portal-card animate-fade-in text-center">
+        {/* Sparkles emoji */}
+        <div className="text-5xl mb-4">✨</div>
 
-          {/* Success Message */}
-          <h1 className="font-display font-bold text-3xl md:text-4xl text-gray-900 mb-3">
-            Thank You{participant?.name ? `, ${participant.name}` : ''}!
-          </h1>
+        {/* Success heading */}
+        <h1 className="font-display font-bold text-3xl mb-4" style={{ color: '#10B981' }}>
+          Success!
+        </h1>
 
-          <p className="text-gray-600 text-lg mb-8">
-            Your availability has been saved for Ayana's celebration 🌴
-          </p>
+        {/* Thank you message */}
+        <p className="text-gray-700 text-base mb-2">
+          Thanks for responding{participant?.name ? `, ${participant.name}` : ''}!
+        </p>
 
-          {/* Shareable Link */}
-          <div className="bg-gray-50 rounded-lg p-5 mb-6">
-            <p className="text-sm font-semibold text-gray-900 mb-3">
-              Your unique link to edit anytime:
+        <p className="text-gray-600 text-sm mb-8">
+          Your availability has been saved for Ayana's beach bachelorette.
+        </p>
+
+        {/* Divider */}
+        <div className="my-8 border-t border-gray-200"></div>
+
+        {/* Share link section */}
+        {uniqueId && (
+          <div className="mb-8">
+            <p className="text-xs font-semibold text-gray-500 mb-3 uppercase tracking-wider">
+              Your Personal Link
             </p>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={shareUrl}
-                readOnly
-                className="flex-1 px-4 py-3 bg-white border border-gray-200 rounded-lg text-sm text-gray-900 font-mono"
-              />
-              <button
-                onClick={copyToClipboard}
-                className="min-h-[44px] px-5 py-3 bg-[#14B8A6] text-white rounded-lg hover:bg-[#0D9488] transition-colors text-sm font-semibold"
-              >
-                {copied ? '✓ Copied' : 'Copy'}
-              </button>
+            <div className="bg-gray-50 rounded-lg p-3 mb-4 border border-gray-200">
+              <p className="text-xs font-mono text-gray-700 break-all">
+                {typeof window !== 'undefined' && `${window.location.origin}/schedule?id=${uniqueId}`}
+              </p>
             </div>
-          </div>
-
-          {/* Info */}
-          <div className="bg-[#14B8A6]/10 border-2 border-[#14B8A6]/20 rounded-xl p-4 mb-8">
-            <p className="text-sm text-gray-700">
-              <strong>Save this link!</strong> You can update your availability anytime before the celebration.
+            <p className="text-xs text-gray-500">
+              Save this link to update your availability anytime
             </p>
           </div>
+        )}
 
-          {/* Action Buttons */}
-          <div className="space-y-3">
-            <a
-              href={`/schedule?id=${uniqueId}`}
-              className="block w-full bg-[#14B8A6] text-white font-bold py-4 px-6 rounded-xl hover:bg-[#0D9488] transition-all shadow-lg text-lg"
-              style={{ minHeight: '56px' }}
-            >
-              Edit My Availability
-            </a>
+        {/* Done button */}
+        <a
+          href="/"
+          className="inline-block px-8 py-3 text-white font-semibold rounded-lg hover:opacity-90 transition-all text-sm"
+          style={{ backgroundColor: '#14B8A6' }}
+        >
+          Done
+        </a>
 
-            <a
-              href="/"
-              className="block w-full bg-white border-2 border-gray-200 text-gray-700 font-semibold py-4 px-6 rounded-xl hover:bg-gray-50 transition-all"
-            >
-              Back to Home
-            </a>
-          </div>
+        {/* Tropical emojis */}
+        <div className="text-2xl mt-8 space-x-2">
+          <span>🌴</span>
+          <span>🌊</span>
+          <span>☀️</span>
         </div>
       </div>
     </div>
@@ -138,11 +117,11 @@ export default function ConfirmationPage() {
       fallback={
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center animate-fade-in">
-            <svg className="animate-spin h-8 w-8 text-[#14B8A6] mx-auto mb-4" viewBox="0 0 24 24">
+            <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#14B8A6' }} viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <p className="text-gray-600">Loading...</p>
+            <p className="text-white font-semibold">Loading...</p>
           </div>
         </div>
       }

@@ -136,11 +136,11 @@ function ScheduleContent() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center animate-fade-in">
-          <svg className="animate-spin h-8 w-8 text-[#14B8A6] mx-auto mb-4" viewBox="0 0 24 24">
+          <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#14B8A6' }} viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          <p className="text-gray-600">Loading your calendar...</p>
+          <p className="text-white font-semibold">Loading your calendar...</p>
         </div>
       </div>
     );
@@ -150,7 +150,7 @@ function ScheduleContent() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-600">Participant not found</p>
+          <p className="text-white font-semibold">Participant not found</p>
         </div>
       </div>
     );
@@ -158,64 +158,66 @@ function ScheduleContent() {
 
   const completedDates = Object.keys(availability).length;
   const totalDates = getAllDates().length;
-  const progress = Math.round((completedDates / totalDates) * 100);
 
   return (
-    <div className="min-h-screen p-6 py-12 animate-fade-in">
-      <div className="max-w-4xl mx-auto">
-        {/* Tropical Header */}
-        <div className="mb-8">
-          <div className="bg-gradient-to-r from-[#14B8A6] to-[#FB7185] rounded-2xl p-6 mb-6 shadow-lg">
-            <h1 className="font-display font-bold text-3xl md:text-4xl text-white mb-2">
-              Hi {participant.name}! 👋
-            </h1>
-            <p className="text-white/90 text-lg">
-              Select your availability for Ayana's celebration
-            </p>
-          </div>
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="portal-card animate-fade-in" style={{ maxHeight: '90vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        {/* Header */}
+        <div className="text-center mb-6">
+          <div className="text-4xl mb-3">🌺</div>
+          <h1 className="font-display font-bold text-2xl mb-2" style={{ color: '#14B8A6' }}>
+            Hi {participant.name}!
+          </h1>
+          <p className="text-gray-600 text-sm">
+            When can you make it?
+          </p>
+          <p className="text-gray-500 text-xs mt-1">
+            Select your availability for each day
+          </p>
         </div>
 
-        {/* Progress Card */}
-        <div className="bg-white rounded-xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.1)] mb-8">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-[#14B8A6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span className="font-semibold text-gray-900">March 6-22, 2025</span>
-            </div>
-            <span className="text-sm text-gray-600">
-              {completedDates}/{totalDates} days selected
-            </span>
+        {/* Progress */}
+        <div className="mb-6 pb-4 border-b border-gray-100">
+          <div className="flex items-center justify-between text-xs text-gray-600 mb-2">
+            <span>{completedDates} of {totalDates} days selected</span>
+            <span>{Math.round((completedDates / totalDates) * 100)}%</span>
           </div>
           <div className="w-full bg-gray-100 rounded-full h-2">
             <div
-              className="bg-[#14B8A6] h-2 rounded-full transition-all"
-              style={{ width: `${progress}%` }}
+              className="h-2 rounded-full transition-all"
+              style={{
+                width: `${(completedDates / totalDates) * 100}%`,
+                backgroundColor: '#10B981'
+              }}
             />
           </div>
         </div>
 
-        {/* Calendar */}
-        <form onSubmit={handleSubmit}>
-          <CalendarGrid
-            availability={availability}
-            onStatusChange={handleStatusChange}
-          />
+        {/* Scrollable Calendar */}
+        <form onSubmit={handleSubmit} style={{ flex: 1, overflow: 'auto', minHeight: 0 }}>
+          <div className="pr-2" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+            <CalendarGrid
+              availability={availability}
+              onStatusChange={handleStatusChange}
+            />
+          </div>
 
           {error && (
-            <div className="mt-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div className="mt-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
               {error}
             </div>
           )}
 
           {/* Submit Button */}
-          <div className="mt-8 sticky bottom-6">
+          <div className="mt-6 pt-4 border-t border-gray-100">
             <button
               type="submit"
               disabled={saving || completedDates === 0}
-              className="w-full bg-[#14B8A6] text-white font-bold py-4 px-6 rounded-xl hover:bg-[#0D9488] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-lg"
-              style={{ minHeight: '56px' }}
+              className="w-full h-14 text-white font-bold rounded-lg hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+              style={{
+                backgroundColor: '#FB923C',
+                minHeight: '56px'
+              }}
             >
               {saving ? (
                 <span className="flex items-center justify-center gap-2">
@@ -226,7 +228,7 @@ function ScheduleContent() {
                   Saving...
                 </span>
               ) : (
-                'Save My Availability'
+                'Submit My Availability 🏖️'
               )}
             </button>
           </div>
@@ -242,11 +244,11 @@ export default function SchedulePage() {
       fallback={
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center animate-fade-in">
-            <svg className="animate-spin h-8 w-8 text-[#14B8A6] mx-auto mb-4" viewBox="0 0 24 24">
+            <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#14B8A6' }} viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <p className="text-gray-600">Loading...</p>
+            <p className="text-white font-semibold">Loading...</p>
           </div>
         </div>
       }
