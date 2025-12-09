@@ -14,7 +14,7 @@ export default function CalendarGrid({
   const dates = getAllDates();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {dates.map((date, index) => {
         const dateKey = getDateKey(date);
         const displayDate = formatDisplayDate(date);
@@ -26,14 +26,14 @@ export default function CalendarGrid({
         return (
           <div
             key={dateKey}
-            className="bg-white p-6 rounded-lg shadow-md transition-all hover:shadow-lg border-2 border-gray-100"
+            className="bg-white p-5 rounded-xl shadow-md transition-all hover:shadow-lg border-2 border-gray-100"
           >
             {/* Date header */}
             <div className="mb-3">
-              <h3 className="text-xl font-serif font-bold" style={{ color: '#0A2E4D' }}>
+              <h3 className="text-lg font-serif font-bold" style={{ color: '#0A2E4D' }}>
                 {dayOfWeek}
               </h3>
-              <p className="text-gray-600 text-sm mb-2">{monthDay}</p>
+              <p className="text-gray-600 text-xs mb-2">{monthDay}</p>
 
               {/* ASSESSED badge - moved below date */}
               {selectedChoice && (
@@ -50,12 +50,12 @@ export default function CalendarGrid({
             </div>
 
             {/* Horizontal pill buttons for tide levels */}
-            <div className="flex gap-3 flex-wrap">
+            <div className="flex gap-2 flex-wrap">
               {/* HIGH TIDE - Available */}
               <button
                 type="button"
                 onClick={() => onStatusChange(dateKey, 'yes')}
-                className="flex-1 min-w-[140px] py-3 px-5 rounded-full font-semibold text-sm transition-all duration-200"
+                className="flex-1 min-w-[120px] py-2.5 px-4 rounded-full font-semibold text-xs transition-all duration-200"
                 style={{
                   backgroundColor: selectedChoice === 'yes' ? '#0A2E4D' : '#FFFFFF',
                   color: selectedChoice === 'yes' ? '#FFFFFF' : '#0A2E4D',
@@ -77,11 +77,11 @@ export default function CalendarGrid({
                   }
                 }}
               >
-                <div className="flex items-center justify-center gap-2">
-                  <span>🌊</span>
+                <div className="flex items-center justify-center gap-1.5">
+                  <span className="text-sm">✨</span>
                   <div className="text-left">
-                    <div className="font-bold">High Tide</div>
-                    <div className="text-xs opacity-75">Fully on deck</div>
+                    <div className="font-bold text-xs">High Tide</div>
+                    <div className="text-[10px] opacity-75">Fully on deck</div>
                   </div>
                 </div>
               </button>
@@ -90,7 +90,7 @@ export default function CalendarGrid({
               <button
                 type="button"
                 onClick={() => onStatusChange(dateKey, 'maybe')}
-                className="flex-1 min-w-[140px] py-3 px-5 rounded-full font-semibold text-sm transition-all duration-200"
+                className="flex-1 min-w-[120px] py-2.5 px-4 rounded-full font-semibold text-xs transition-all duration-200"
                 style={{
                   backgroundColor: selectedChoice === 'maybe' ? '#F9D949' : '#FFFFFF',
                   color: '#0A2E4D',
@@ -110,11 +110,11 @@ export default function CalendarGrid({
                   }
                 }}
               >
-                <div className="flex items-center justify-center gap-2">
-                  <span>〰️</span>
+                <div className="flex items-center justify-center gap-1.5">
+                  <span className="text-sm">〰️</span>
                   <div className="text-left">
-                    <div className="font-bold">Mid Tide</div>
-                    <div className="text-xs opacity-75">Possibly afloat</div>
+                    <div className="font-bold text-xs">Mid Tide</div>
+                    <div className="text-[10px] opacity-75">Possibly afloat</div>
                   </div>
                 </div>
               </button>
@@ -123,7 +123,7 @@ export default function CalendarGrid({
               <button
                 type="button"
                 onClick={() => onStatusChange(dateKey, 'no')}
-                className="flex-1 min-w-[140px] py-3 px-5 rounded-full font-semibold text-sm transition-all duration-200"
+                className="flex-1 min-w-[120px] py-2.5 px-4 rounded-full font-semibold text-xs transition-all duration-200"
                 style={{
                   backgroundColor: selectedChoice === 'no' ? '#E5E5E5' : '#FFFFFF',
                   color: selectedChoice === 'no' ? '#6B7280' : '#0A2E4D',
@@ -143,11 +143,11 @@ export default function CalendarGrid({
                   }
                 }}
               >
-                <div className="flex items-center justify-center gap-2">
-                  <span>○</span>
+                <div className="flex items-center justify-center gap-1.5">
+                  <span className="text-sm">○</span>
                   <div className="text-left">
-                    <div className="font-bold">Low Tide</div>
-                    <div className="text-xs opacity-75">Washed ashore</div>
+                    <div className="font-bold text-xs">Low Tide</div>
+                    <div className="text-[10px] opacity-75">Washed ashore</div>
                   </div>
                 </div>
               </button>

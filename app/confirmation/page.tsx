@@ -52,28 +52,33 @@ function ConfirmationContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-8">
-      <div className="bg-white p-12 max-w-2xl w-full border-t-8 text-center rounded-lg shadow-2xl" style={{ borderTopColor: '#0A2E4D' }}>
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-8" style={{
+      background: 'linear-gradient(135deg, #0A2E4D 0%, #1B4965 50%, #62B6CB 100%)'
+    }}>
+      <div className="bg-white p-8 sm:p-12 max-w-xl w-full border-t-8 text-center rounded-2xl shadow-2xl" style={{
+        borderTopColor: '#0A2E4D',
+        boxShadow: '0 25px 50px -12px rgba(10, 46, 77, 0.4)'
+      }}>
 
-        <div className="text-7xl mb-6">✓</div>
+        <div className="text-6xl mb-6">✨</div>
 
-        <h1 className="font-serif text-4xl mb-4" style={{ color: '#0A2E4D' }}>
+        <h1 className="font-serif text-3xl mb-4" style={{ color: '#0A2E4D' }}>
           Expedition Application Submitted
         </h1>
 
-        <p className="text-xl text-gray-700 mb-8">
+        <p className="text-lg text-gray-700 mb-8">
           Thank you, <span className="font-semibold">{participant?.name}</span>. Your availability
           assessment has been recorded for Dr. Johnson's coastal celebration expedition.
         </p>
 
-        <div className="border-l-4 p-6 mb-10 rounded-r-lg" style={{ backgroundColor: '#F9F7F4', borderLeftColor: '#62B6CB' }}>
-          <p className="text-sm font-bold mb-3 uppercase tracking-wider" style={{ color: '#0A2E4D' }}>Your Expedition ID</p>
+        <div className="border-l-4 p-5 mb-8 rounded-r-lg" style={{ backgroundColor: '#F9F7F4', borderLeftColor: '#62B6CB' }}>
+          <p className="text-xs font-bold mb-3 uppercase tracking-wider" style={{ color: '#0A2E4D' }}>Your Expedition ID</p>
           {uniqueId && (
             <>
-              <code className="text-base font-mono bg-white px-4 py-3 inline-block border border-gray-300 rounded">
+              <code className="text-sm font-mono bg-white px-3 py-2 inline-block border border-gray-300 rounded break-all">
                 {typeof window !== 'undefined' && `${window.location.origin}/schedule?id=${uniqueId}`}
               </code>
-              <p className="text-sm text-gray-600 mt-4 italic">
+              <p className="text-xs text-gray-600 mt-3 italic">
                 Save this link to update your availability if needed
               </p>
             </>
@@ -82,7 +87,7 @@ function ConfirmationContent() {
 
         <button
           onClick={() => window.location.href = '/'}
-          className="px-10 py-4 text-white font-semibold uppercase tracking-wide transition-all rounded-md shadow-lg hover:shadow-xl"
+          className="px-8 py-3 text-white font-semibold uppercase tracking-wide transition-all rounded-full shadow-lg hover:shadow-xl text-sm"
           style={{ backgroundColor: '#0A2E4D' }}
           onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#1B4965'}
           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#0A2E4D'}
@@ -90,8 +95,8 @@ function ConfirmationContent() {
           Complete
         </button>
 
-        <div className="mt-10 text-sm text-gray-500 italic">
-          <p>🌊 Looking forward to the expedition</p>
+        <div className="mt-8 text-sm text-gray-500 italic">
+          <p>✨ Looking forward to the expedition</p>
         </div>
 
       </div>

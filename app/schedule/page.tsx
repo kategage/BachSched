@@ -170,37 +170,45 @@ function ScheduleContent() {
   const totalDates = getAllDates().length;
 
   return (
-    <div className="min-h-screen py-8 px-4">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen py-8 px-4" style={{
+      background: 'linear-gradient(135deg, #0A2E4D 0%, #1B4965 50%, #62B6CB 100%)'
+    }}>
+      <div className="max-w-2xl mx-auto">
 
         {/* Header */}
-        <div className="bg-white border-t-8 p-10 mb-8 text-center rounded-lg shadow-lg" style={{ borderTopColor: '#0A2E4D' }}>
-          <div className="text-4xl mb-4">🌊</div>
-          <h1 className="font-serif text-4xl mb-3" style={{ color: '#0A2E4D' }}>
+        <div className="bg-white border-t-8 p-8 mb-6 text-center rounded-2xl shadow-2xl" style={{
+          borderTopColor: '#0A2E4D',
+          boxShadow: '0 25px 50px -12px rgba(10, 46, 77, 0.4)'
+        }}>
+          <div className="text-4xl mb-4">✨</div>
+          <h1 className="font-serif text-3xl mb-3" style={{ color: '#0A2E4D' }}>
             Expedition Availability Assessment
           </h1>
-          <p className="text-xl text-gray-700 mb-2">
+          <p className="text-lg text-gray-700 mb-2">
             Welcome, <span className="font-semibold">{participant.name}</span>
           </p>
-          <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm text-gray-600 italic mb-3">
+            We're glad you're considering joining the crew. We'll use this information to inform our final dates.
+          </p>
+          <p className="text-gray-600 max-w-xl mx-auto leading-relaxed text-sm">
             Mark your availability for each field study date using the tide levels below.
             Select <strong>High Tide</strong> if you're available, <strong>Mid Tide</strong> if you might be able to join, or <strong>Low Tide</strong> if you're unavailable.
           </p>
         </div>
 
         {/* Progress bar */}
-        <div className="bg-white p-6 mb-8 rounded-lg shadow-md border-l-4" style={{ borderLeftColor: '#62B6CB' }}>
+        <div className="bg-white p-5 mb-6 rounded-xl shadow-md border-l-4" style={{ borderLeftColor: '#62B6CB' }}>
           <div className="flex justify-between items-center mb-3">
-            <span className="text-gray-700 font-medium">
-              <span className="text-2xl font-bold" style={{ color: '#0A2E4D' }}>{completedDates}</span> of {totalDates} dates assessed
+            <span className="text-gray-700 font-medium text-sm">
+              <span className="text-xl font-bold" style={{ color: '#0A2E4D' }}>{completedDates}</span> of {totalDates} dates assessed
             </span>
-            <span className="text-sm font-semibold px-3 py-1 rounded-full" style={{ backgroundColor: '#F9D949', color: '#0A2E4D' }}>
+            <span className="text-xs font-semibold px-3 py-1 rounded-full" style={{ backgroundColor: '#F9D949', color: '#0A2E4D' }}>
               {Math.round((completedDates/totalDates)*100)}%
             </span>
           </div>
-          <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+          <div className="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden">
             <div
-              className="h-3 rounded-full transition-all duration-500 ease-out"
+              className="h-2.5 rounded-full transition-all duration-500 ease-out"
               style={{
                 width: `${(completedDates/totalDates)*100}%`,
                 background: 'linear-gradient(90deg, #0A2E4D 0%, #62B6CB 100%)'
@@ -225,11 +233,11 @@ function ScheduleContent() {
           )}
 
           {/* Submit button */}
-          <div className="bg-white p-8 rounded-lg shadow-md text-center">
+          <div className="bg-white p-6 rounded-xl shadow-md text-center">
             <button
               type="submit"
               disabled={saving || completedDates !== totalDates}
-              className="w-full max-w-md h-16 text-lg font-semibold tracking-wide uppercase transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-md shadow-lg hover:shadow-xl"
+              className="w-full max-w-sm h-14 text-base font-semibold tracking-wide uppercase transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-full shadow-lg hover:shadow-xl"
               style={{
                 backgroundColor: completedDates === totalDates ? '#0A2E4D' : '#D1D5DB',
                 color: completedDates === totalDates ? '#FFFFFF' : '#6B7280'
@@ -248,7 +256,7 @@ function ScheduleContent() {
               {saving ? 'Submitting Assessment...' : 'Submit Expedition Application →'}
             </button>
             {completedDates !== totalDates && (
-              <p className="text-sm text-gray-600 mt-4 italic">
+              <p className="text-xs text-gray-600 mt-3 italic">
                 Please assess all {totalDates - completedDates} remaining dates to continue
               </p>
             )}
