@@ -1,5 +1,7 @@
 'use client';
 
+import { oracabessaTidesMarch2026, type TideDay } from '@/lib/tides-oracabessa-march-2026';
+
 interface DateCardProps {
   date: Date;
   dateKey: string;
@@ -14,6 +16,7 @@ interface DateCardProps {
  * DateCard - Modern tide chart card with visual 3-button grid
  * Structure:
  * - Header with date info and assessment badge
+ * - Predicted tide information (scientific data)
  * - 3-column grid of large interactive tide buttons
  */
 export default function DateCard({
@@ -24,6 +27,17 @@ export default function DateCard({
   selectedChoice,
   onStatusChange,
 }: DateCardProps) {
+  // Find tide data for this date
+  const tideData = oracabessaTidesMarch2026.find((day: TideDay) => day.date === dateKey);
+
+  // Format tide events to 12-hour time
+  const formatTime = (time24: string): string => {
+    const [hours, minutes] = time24.split(':').map(Number);
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const hours12 = hours % 12 || 12;
+    return `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
 
@@ -56,6 +70,41 @@ export default function DateCard({
           </div>
         </div>
       </div>
+
+      {/* Predicted Tides Section */}
+      {tideData && (
+        <div className="px-6 pt-4 pb-2 bg-slate-50 border-b border-gray-100">
+          <div className="text-[10px] uppercase tracking-wider font-bold text-slate-500 mb-1.5">
+            Predicted Tides • Oracabessa, Jamaica
+          </div>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div>
+              <span className="font-semibold text-slate-700">High: </span>
+              <span className="text-slate-600">
+                {tideData.high.map((t, i) => (
+                  <span key={i}>
+                    {formatTime(t.time)} ({t.heightFt} ft)
+                    {i < tideData.high.length - 1 && ', '}
+                  </span>
+                ))}
+                {tideData.high.length === 0 && '—'}
+              </span>
+            </div>
+            <div>
+              <span className="font-semibold text-slate-700">Low: </span>
+              <span className="text-slate-600">
+                {tideData.low.map((t, i) => (
+                  <span key={i}>
+                    {formatTime(t.time)} ({t.heightFt} ft)
+                    {i < tideData.low.length - 1 && ', '}
+                  </span>
+                ))}
+                {tideData.low.length === 0 && '—'}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Tide Chart Visualization - 3-button grid */}
       <div className="p-6">
