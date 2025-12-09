@@ -18,25 +18,25 @@ export default function CalendarGrid({
     const isSelected = currentStatus === status;
 
     const baseClass =
-      'px-3 py-2 rounded-lg font-medium text-sm transition-all border-2';
+      'min-h-[44px] px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 border-2 touch-manipulation active:scale-95';
 
     if (isSelected) {
       if (status === 'yes') {
-        return `${baseClass} bg-green-500 text-white border-green-600 shadow-md`;
+        return `${baseClass} bg-tropical-turquoise text-white border-tropical-turquoise shadow-lg shadow-tropical-turquoise/30 hover:shadow-xl`;
       }
       if (status === 'no') {
-        return `${baseClass} bg-red-500 text-white border-red-600 shadow-md`;
+        return `${baseClass} bg-tropical-coral text-white border-tropical-coral shadow-lg shadow-tropical-coral/30 hover:shadow-xl`;
       }
       if (status === 'maybe') {
-        return `${baseClass} bg-yellow-400 text-gray-900 border-yellow-500 shadow-md`;
+        return `${baseClass} bg-tropical-orange text-white border-tropical-orange shadow-lg shadow-tropical-orange/30 hover:shadow-xl`;
       }
     }
 
-    return `${baseClass} bg-white text-gray-700 border-gray-300 hover:border-gray-400`;
+    return `${baseClass} bg-white text-tropical-navy border-tropical-turquoise/30 hover:border-tropical-turquoise hover:bg-tropical-sky/50`;
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {dates.map((date) => {
         const dateKey = getDateKey(date);
         const displayDate = formatDisplayDate(date);
@@ -44,38 +44,47 @@ export default function CalendarGrid({
         return (
           <div
             key={dateKey}
-            className="bg-white rounded-xl p-4 shadow-md border-2 border-pink-200"
+            className="bg-white rounded-2xl p-5 shadow-md hover:shadow-lg transition-shadow border border-tropical-turquoise/20"
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               {/* Date Display */}
               <div className="flex-shrink-0">
-                <p className="font-bold text-lg text-party-purple">
+                <p className="font-bold text-lg text-tropical-navy">
                   {displayDate}
                 </p>
               </div>
 
               {/* Status Buttons */}
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap sm:flex-nowrap">
                 <button
                   type="button"
                   onClick={() => onStatusChange(dateKey, 'yes')}
                   className={getButtonClass(dateKey, 'yes')}
                 >
-                  ✓ Yes
+                  <span className="flex items-center gap-1">
+                    <span>✓</span>
+                    <span>Yes</span>
+                  </span>
                 </button>
                 <button
                   type="button"
                   onClick={() => onStatusChange(dateKey, 'maybe')}
                   className={getButtonClass(dateKey, 'maybe')}
                 >
-                  ? Maybe
+                  <span className="flex items-center gap-1">
+                    <span>?</span>
+                    <span>Maybe</span>
+                  </span>
                 </button>
                 <button
                   type="button"
                   onClick={() => onStatusChange(dateKey, 'no')}
                   className={getButtonClass(dateKey, 'no')}
                 >
-                  ✗ No
+                  <span className="flex items-center gap-1">
+                    <span>✗</span>
+                    <span>No</span>
+                  </span>
                 </button>
               </div>
             </div>
