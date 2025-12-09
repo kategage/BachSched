@@ -20,8 +20,8 @@ export function formatDate(date: Date): string {
 
 export function formatDisplayDate(date: Date): string {
   return date.toLocaleDateString('en-US', {
-    weekday: 'short',
-    month: 'short',
+    weekday: 'long',
+    month: 'long',
     day: 'numeric',
   });
 }
