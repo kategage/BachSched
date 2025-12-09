@@ -170,15 +170,13 @@ function ScheduleContent() {
   const totalDates = getAllDates().length;
 
   return (
-    <div className="min-h-screen py-8 px-4" style={{
-      background: 'linear-gradient(135deg, #0A2E4D 0%, #1B4965 50%, #62B6CB 100%)'
-    }}>
+    <div className="min-h-screen py-8 px-4 bg-white">
       <div className="max-w-2xl mx-auto">
 
         {/* Header */}
         <div className="bg-white border-t-8 p-8 mb-6 text-center rounded-2xl shadow-2xl" style={{
           borderTopColor: '#0A2E4D',
-          boxShadow: '0 25px 50px -12px rgba(10, 46, 77, 0.4)'
+          boxShadow: '0 25px 50px -12px rgba(10, 46, 77, 0.25)'
         }}>
           <div className="text-4xl mb-4">✨</div>
           <h1 className="font-serif text-3xl mb-3" style={{ color: '#0A2E4D' }}>

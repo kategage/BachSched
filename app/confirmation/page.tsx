@@ -52,12 +52,10 @@ function ConfirmationContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 sm:p-8" style={{
-      background: 'linear-gradient(135deg, #0A2E4D 0%, #1B4965 50%, #62B6CB 100%)'
-    }}>
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-8 bg-white">
       <div className="bg-white p-8 sm:p-12 max-w-xl w-full border-t-8 text-center rounded-2xl shadow-2xl" style={{
         borderTopColor: '#0A2E4D',
-        boxShadow: '0 25px 50px -12px rgba(10, 46, 77, 0.4)'
+        boxShadow: '0 25px 50px -12px rgba(10, 46, 77, 0.25)'
       }}>
 
         <div className="text-6xl mb-6">✨</div>
