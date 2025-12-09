@@ -65,7 +65,7 @@ export default function Home() {
 
         {/* Subheading */}
         <p className="text-base font-semibold mb-8" style={{ color: '#FB923C' }}>
-          Beach Getaway • March 6-22, 2025
+          Beach Getaway • March 6-22, 2026
         </p>
 
         {/* Wave divider */}

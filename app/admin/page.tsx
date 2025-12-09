@@ -218,7 +218,7 @@ export default function AdminPage() {
                 </h1>
               </div>
               <p className="text-white/90 font-medium ml-14">
-                {participants.length} participants • March 6-22, 2025
+                {participants.length} participants • March 6-22, 2026
               </p>
             </div>
             <button
