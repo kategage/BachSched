@@ -171,63 +171,47 @@ function ScheduleContent() {
 
   return (
     <div className="min-h-screen py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
 
         {/* Header */}
-        <div className="bg-white border-t-8 p-8 mb-8 text-center" style={{ borderTopColor: '#0A2E4D' }}>
-          <h1 className="font-serif text-3xl mb-2" style={{ color: '#0A2E4D' }}>
+        <div className="bg-white border-t-8 p-10 mb-8 text-center rounded-lg shadow-lg" style={{ borderTopColor: '#05324F' }}>
+          <div className="text-4xl mb-4">🌊</div>
+          <h1 className="font-serif text-4xl mb-3" style={{ color: '#05324F' }}>
             Expedition Availability Assessment
           </h1>
-          <p className="text-lg text-gray-700 mb-4">
+          <p className="text-xl text-gray-700 mb-2">
             Welcome, <span className="font-semibold">{participant.name}</span>
           </p>
-          <p className="text-gray-600">
-            Mark your availability for each field study date using the tide chart below.
-            Select your tide level: High Tide (Available), Mid Tide (Possible), or Low Tide (Unavailable).
+          <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Mark your availability for each field study date using the tide levels below.
+            Select <strong>High Tide</strong> if you're available, <strong>Mid Tide</strong> if you might be able to join, or <strong>Low Tide</strong> if you're unavailable.
           </p>
         </div>
 
-        {/* Progress indicator */}
-        <div className="bg-white p-6 mb-6 border-l-4" style={{ borderLeftColor: '#F9D949' }}>
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700">
-              <span className="text-3xl font-bold" style={{ color: '#0A2E4D' }}>{completedDates}</span> of {totalDates} dates assessed
+        {/* Progress bar - thin and elegant */}
+        <div className="bg-white p-6 mb-8 rounded-lg shadow-md border-l-4" style={{ borderLeftColor: '#B7E3E0' }}>
+          <div className="flex justify-between items-center mb-3">
+            <span className="text-gray-700 font-medium">
+              <span className="text-2xl font-bold" style={{ color: '#05324F' }}>{completedDates}</span> of {totalDates} dates assessed
             </span>
-            <span className="text-gray-500">{Math.round((completedDates/totalDates)*100)}% complete</span>
+            <span className="text-sm font-semibold px-3 py-1 rounded-full" style={{ backgroundColor: '#F3E9D2', color: '#05324F' }}>
+              {Math.round((completedDates/totalDates)*100)}%
+            </span>
           </div>
-          <div className="w-full bg-gray-200 h-2 mt-3">
+          <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
             <div
-              className="h-2 transition-all duration-300"
+              className="h-3 rounded-full transition-all duration-500 ease-out"
               style={{
                 width: `${(completedDates/totalDates)*100}%`,
-                backgroundColor: '#F9D949'
+                background: 'linear-gradient(90deg, #05324F 0%, #B7E3E0 100%)'
               }}
             ></div>
           </div>
         </div>
 
-        {/* Legend */}
-        <div className="bg-white p-6 mb-6 flex justify-around text-center">
-          <div>
-            <div className="w-16 h-16 mx-auto mb-2 rounded-full flex items-center justify-center text-white text-2xl" style={{ backgroundColor: '#0A2E4D' }}>🌊</div>
-            <p className="font-semibold" style={{ color: '#0A2E4D' }}>High Tide</p>
-            <p className="text-sm text-gray-600">Available</p>
-          </div>
-          <div>
-            <div className="w-16 h-16 mx-auto mb-2 rounded-full flex items-center justify-center text-2xl" style={{ backgroundColor: '#F9D949' }}>〰️</div>
-            <p className="font-semibold text-gray-700">Mid Tide</p>
-            <p className="text-sm text-gray-600">Possible</p>
-          </div>
-          <div>
-            <div className="w-16 h-16 bg-gray-300 mx-auto mb-2 rounded-full flex items-center justify-center text-2xl">○</div>
-            <p className="font-semibold text-gray-500">Low Tide</p>
-            <p className="text-sm text-gray-600">Unavailable</p>
-          </div>
-        </div>
-
-        {/* Tide chart grid */}
+        {/* Availability Grid */}
         <form onSubmit={handleSubmit}>
-          <div className="mb-8">
+          <div className="mb-10">
             <CalendarGrid
               availability={availability}
               onStatusChange={handleStatusChange}
@@ -235,36 +219,36 @@ function ScheduleContent() {
           </div>
 
           {error && (
-            <div className="bg-red-50 border-l-4 border-red-600 text-red-700 px-4 py-3 mb-6">
+            <div className="bg-red-50 border-l-4 border-red-600 text-red-700 px-5 py-4 mb-6 rounded-r-lg">
               {error}
             </div>
           )}
 
           {/* Submit button */}
-          <div className="bg-white p-8 text-center">
+          <div className="bg-white p-8 rounded-lg shadow-md text-center">
             <button
               type="submit"
               disabled={saving || completedDates !== totalDates}
-              className="w-full max-w-md h-16 text-lg font-semibold tracking-wide uppercase transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full max-w-md h-16 text-lg font-semibold tracking-wide uppercase transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-md shadow-lg hover:shadow-xl"
               style={{
-                backgroundColor: completedDates === totalDates ? '#0A2E4D' : '#D1D5DB',
+                backgroundColor: completedDates === totalDates ? '#05324F' : '#D1D5DB',
                 color: completedDates === totalDates ? '#FFFFFF' : '#6B7280'
               }}
               onMouseEnter={(e) => {
                 if (completedDates === totalDates && !saving) {
-                  e.currentTarget.style.backgroundColor = '#000000';
+                  e.currentTarget.style.backgroundColor = '#03243A';
                 }
               }}
               onMouseLeave={(e) => {
                 if (completedDates === totalDates && !saving) {
-                  e.currentTarget.style.backgroundColor = '#0A2E4D';
+                  e.currentTarget.style.backgroundColor = '#05324F';
                 }
               }}
             >
-              {saving ? 'Submitting...' : 'Submit Expedition Application →'}
+              {saving ? 'Submitting Assessment...' : 'Submit Expedition Application →'}
             </button>
             {completedDates !== totalDates && (
-              <p className="text-sm text-gray-500 mt-3">
+              <p className="text-sm text-gray-600 mt-4 italic">
                 Please assess all {totalDates - completedDates} remaining dates to continue
               </p>
             )}

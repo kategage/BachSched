@@ -86,9 +86,9 @@ export default function AdminPage() {
   };
 
   const getStatusColor = (status?: 'yes' | 'no' | 'maybe') => {
-    if (status === 'yes') return 'bg-[#0A2E4D]';
+    if (status === 'yes') return 'bg-[#05324F]';
     if (status === 'no') return 'bg-gray-300';
-    if (status === 'maybe') return 'bg-[#F9D949]';
+    if (status === 'maybe') return 'bg-[#E3A534]';
     return 'bg-white border border-gray-300';
   };
 
@@ -139,10 +139,10 @@ export default function AdminPage() {
     return (
       <div className="min-h-screen flex items-center justify-center p-6">
         <div className="max-w-md w-full animate-fade-in">
-          <div className="bg-white shadow-lg p-8 border-t-8" style={{ borderTopColor: '#0A2E4D' }}>
+          <div className="bg-white shadow-lg p-8 border-t-8" style={{ borderTopColor: '#05324F' }}>
             <div className="text-center mb-8">
               <div className="text-4xl mb-4">🔒</div>
-              <h1 className="font-serif text-3xl mb-2" style={{ color: '#0A2E4D' }}>
+              <h1 className="font-serif text-3xl mb-2" style={{ color: '#05324F' }}>
                 Expedition Control
               </h1>
               <p className="text-gray-600">
@@ -155,7 +155,7 @@ export default function AdminPage() {
                 <label
                   htmlFor="password"
                   className="block text-sm font-semibold tracking-wide mb-3"
-                  style={{ color: '#0A2E4D' }}
+                  style={{ color: '#05324F' }}
                 >
                   ADMIN PASSWORD
                 </label>
@@ -166,10 +166,10 @@ export default function AdminPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none transition-all"
                   style={{
-                    borderColor: password ? '#0A2E4D' : '#D1D5DB'
+                    borderColor: password ? '#05324F' : '#D1D5DB'
                   }}
-                  onFocus={(e) => e.target.style.borderColor = '#0A2E4D'}
-                  onBlur={(e) => e.target.style.borderColor = password ? '#0A2E4D' : '#D1D5DB'}
+                  onFocus={(e) => e.target.style.borderColor = '#05324F'}
+                  onBlur={(e) => e.target.style.borderColor = password ? '#05324F' : '#D1D5DB'}
                   placeholder="Enter password"
                 />
               </div>
@@ -183,9 +183,9 @@ export default function AdminPage() {
               <button
                 type="submit"
                 className="w-full h-14 text-white font-semibold tracking-wide transition-all uppercase"
-                style={{ backgroundColor: '#0A2E4D' }}
+                style={{ backgroundColor: '#05324F' }}
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#000000'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#0A2E4D'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#05324F'}
               >
                 Access Dashboard →
               </button>
@@ -212,10 +212,10 @@ export default function AdminPage() {
     <div className="min-h-screen p-8">
       <div className="max-w-7xl mx-auto">
 
-        <div className="bg-white border-t-8 p-8 mb-8" style={{ borderTopColor: '#0A2E4D' }}>
+        <div className="bg-white border-t-8 p-8 mb-8" style={{ borderTopColor: '#05324F' }}>
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
             <div>
-              <h1 className="font-serif text-3xl mb-2" style={{ color: '#0A2E4D' }}>
+              <h1 className="font-serif text-3xl mb-2" style={{ color: '#05324F' }}>
                 Expedition Roster Management
               </h1>
               <p className="text-gray-600">
@@ -232,11 +232,11 @@ export default function AdminPage() {
               }}
               className="px-6 py-3 font-semibold uppercase tracking-wide transition-all"
               style={{
-                backgroundColor: '#0A2E4D',
+                backgroundColor: '#05324F',
                 color: '#FFFFFF'
               }}
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#000000'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#0A2E4D'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#05324F'}
             >
               Logout
             </button>
@@ -245,7 +245,7 @@ export default function AdminPage() {
 
         {loading ? (
           <div className="text-center py-12">
-            <svg className="animate-spin h-12 w-12 mx-auto mb-4" style={{ color: '#0A2E4D' }} viewBox="0 0 24 24">
+            <svg className="animate-spin h-12 w-12 mx-auto mb-4" style={{ color: '#05324F' }} viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
@@ -254,8 +254,8 @@ export default function AdminPage() {
         ) : (
           <>
             {/* Best Periods Section */}
-            <div className="bg-white p-8 mt-6 border-l-4 mb-6" style={{ borderLeftColor: '#F9D949' }}>
-              <h2 className="font-serif text-2xl mb-4" style={{ color: '#0A2E4D' }}>
+            <div className="bg-white p-8 mt-6 border-l-4 mb-6" style={{ borderLeftColor: '#E3A534' }}>
+              <h2 className="font-serif text-2xl mb-4" style={{ color: '#05324F' }}>
                 Optimal 4-Day Field Study Windows
               </h2>
               <div className="space-y-3">
@@ -264,7 +264,7 @@ export default function AdminPage() {
                     key={index}
                     className="p-4 border-2 transition-all"
                     style={{
-                      borderColor: index === 0 ? '#0A2E4D' : '#E5E7EB',
+                      borderColor: index === 0 ? '#05324F' : '#E5E7EB',
                       backgroundColor: index === 0 ? '#F9F7F4' : '#FFFFFF'
                     }}
                   >
@@ -273,7 +273,7 @@ export default function AdminPage() {
                         {index + 1}. {formatDisplayDate(period.startDate)} – {formatDisplayDate(period.endDate)}
                       </div>
                       <div className="flex flex-wrap gap-2 text-sm font-semibold">
-                        <span className="px-3 py-1" style={{ backgroundColor: 'rgba(10, 46, 77, 0.1)', color: '#0A2E4D' }}>
+                        <span className="px-3 py-1" style={{ backgroundColor: 'rgba(10, 46, 77, 0.1)', color: '#05324F' }}>
                           🌊 {period.yesCount} Available
                         </span>
                         <span className="px-3 py-1" style={{ backgroundColor: 'rgba(249, 217, 73, 0.2)', color: '#92400E' }}>
@@ -294,14 +294,14 @@ export default function AdminPage() {
 
             {/* Availability Grid */}
             <div className="bg-white p-6 overflow-x-auto">
-              <h2 className="font-serif text-2xl mb-4" style={{ color: '#0A2E4D' }}>
+              <h2 className="font-serif text-2xl mb-4" style={{ color: '#05324F' }}>
                 Crew Availability Matrix
               </h2>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-sm border-collapse">
                   <thead>
-                    <tr className="border-b-2" style={{ borderColor: '#0A2E4D' }}>
+                    <tr className="border-b-2" style={{ borderColor: '#05324F' }}>
                       <th className="text-left p-3 font-semibold">Member Name</th>
                       {dates.map((date) => (
                         <th key={getDateKey(date)} className="p-2 text-xs text-center min-w-[50px]">
@@ -340,13 +340,13 @@ export default function AdminPage() {
 
               <div className="mt-6 flex flex-wrap gap-4 text-sm font-semibold">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#0A2E4D' }}>
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#05324F' }}>
                     <span className="text-white text-xs">🌊</span>
                   </div>
                   <span className="text-gray-900">High Tide (Available)</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#F9D949' }}>
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#E3A534' }}>
                     <span className="text-xs">〰️</span>
                   </div>
                   <span className="text-gray-900">Mid Tide (Possible)</span>

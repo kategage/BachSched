@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700;900&family=Playfair+Display:wght@600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,20 +6,25 @@
 
 :root {
   /* Primary */
-  --deep-ocean: #0A2E4D;
+  --deep-navy: #05324F;
   --black: #000000;
   --white: #FFFFFF;
   --cream: #F9F7F4;
 
-  /* Accents */
-  --sunshine-yellow: #F9D949;
+  /* Expedition Palette */
+  --seafoam: #B7E3E0;
+  --sand-beige: #F3E9D2;
+  --soft-gold: #E3A534;
+
+  /* Legacy - for compatibility */
+  --deep-ocean: #05324F;
+  --sunshine-yellow: #E3A534;
   --ocean-mid: #1B4965;
   --ocean-light: #62B6CB;
-  --coral-accent: #FF6B6B;
 
   /* Tide states */
-  --high-tide: #0A2E4D;
-  --mid-tide: #F9D949;
+  --high-tide: #B7E3E0;
+  --mid-tide: #F7E7A0;
   --low-tide: #E5E5E5;
 }
 
@@ -27,7 +32,7 @@ body {
   font-family: 'Inter', 'Helvetica Neue', sans-serif;
   background: var(--cream);
   min-height: 100vh;
-  color: var(--black);
+  color: var(--deep-navy);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
@@ -35,7 +40,11 @@ body {
 
 /* Font utilities */
 .font-serif {
-  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Merriweather', 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', Georgia, serif;
 }
 
 /* Portal Card Styling */
