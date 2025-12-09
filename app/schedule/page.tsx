@@ -81,12 +81,22 @@ function ScheduleContent() {
 
     if (!participant) return;
 
+    // Validate that all dates have been answered
+    const dates = getAllDates();
+    const allDatesAnswered = dates.every((date) => {
+      const dateKey = getDateKey(date);
+      return availability[dateKey] !== undefined;
+    });
+
+    if (!allDatesAnswered) {
+      setError('Please select an option (Yes/Maybe/No) for all 17 dates before submitting.');
+      return;
+    }
+
     setSaving(true);
     setError('');
 
     try {
-      const dates = getAllDates();
-
       // Delete existing availability
       await supabase
         .from('availability')
@@ -164,15 +174,15 @@ function ScheduleContent() {
       <div className="portal-card animate-fade-in" style={{ maxHeight: '90vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         {/* Header */}
         <div className="text-center mb-6">
-          <div className="text-4xl mb-3">🌺</div>
+          <div className="text-5xl mb-3">✨🌺✨</div>
           <h1 className="font-display font-bold text-2xl mb-2" style={{ color: '#14B8A6' }}>
-            Hi {participant.name}! ✨
+            Hi {participant.name}!
           </h1>
-          <p className="text-gray-600 text-sm">
-            When can you make it?
+          <p className="text-gray-600 text-base font-semibold">
+            When can you make it? 🌴
           </p>
-          <p className="text-gray-500 text-xs mt-1">
-            Select your availability for each day
+          <p className="text-gray-500 text-sm mt-1">
+            Select your availability for each day below
           </p>
         </div>
 

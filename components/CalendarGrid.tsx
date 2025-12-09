@@ -19,23 +19,23 @@ export default function CalendarGrid({
 
     // Pill-shaped buttons with proper styling
     const baseClass =
-      'px-6 py-3 font-semibold transition-all duration-200 ease-in-out touch-manipulation flex-1 text-sm';
+      'rounded-full px-6 py-3 font-semibold transition-all duration-200 ease-in-out touch-manipulation flex-1 text-base min-w-[80px] h-12';
 
     if (isSelected) {
       // Selected state with scale and shadow
       if (status === 'yes') {
-        return `${baseClass} text-white transform scale-105` + ' bg-emerald-500 rounded-full shadow-[0_4px_6px_rgba(0,0,0,0.1)]'; // Emerald green
+        return `${baseClass} bg-emerald-500 text-white transform scale-105 shadow-lg`;
       }
       if (status === 'maybe') {
-        return `${baseClass} text-gray-900 transform scale-105` + ' bg-amber-400 rounded-full shadow-[0_4px_6px_rgba(0,0,0,0.1)]'; // Sunshine yellow
+        return `${baseClass} bg-amber-400 text-gray-900 transform scale-105 shadow-lg`;
       }
       if (status === 'no') {
-        return `${baseClass} text-white transform scale-105` + ' bg-rose-400 rounded-full shadow-[0_4px_6px_rgba(0,0,0,0.1)]'; // Coral pink
+        return `${baseClass} bg-rose-400 text-white transform scale-105 shadow-lg`;
       }
     }
 
     // Unselected state
-    return `${baseClass} bg-white text-gray-600 border-2 border-gray-200 hover:bg-gray-50 hover:border-gray-300 rounded-full`;
+    return `${baseClass} bg-white text-gray-600 border-2 border-gray-200 hover:bg-gray-50 hover:border-gray-300`;
   };
 
   const getStatusEmoji = (status: 'yes' | 'no' | 'maybe') => {
