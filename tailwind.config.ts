@@ -9,10 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'party-pink': '#FF69B4',
-        'party-purple': '#9D4EDD',
-        'party-gold': '#FFD700',
-        'party-rose': '#FF1493',
+        'tropical-turquoise': '#40E0D0',
+        'tropical-aqua': '#00CED1',
+        'tropical-coral': '#FF7F50',
+        'tropical-sand': '#F5DEB3',
+        'tropical-orange': '#FF6B6B',
+        'tropical-cream': '#FFF9F0',
+        'tropical-sky': '#F0F8FF',
+        'tropical-teal': '#008B8B',
+        'tropical-navy': '#1A365D',
+      },
+      fontFamily: {
+        'tropical': ['Poppins', 'sans-serif'],
       },
     },
   },

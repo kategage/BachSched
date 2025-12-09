@@ -135,9 +135,9 @@ function ScheduleContent() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-4xl mb-4">⏳</div>
-          <p className="text-gray-600">Loading your calendar...</p>
+        <div className="text-center animate-fade-in">
+          <div className="text-6xl mb-4">🌴</div>
+          <p className="text-tropical-navy font-semibold text-lg">Loading your calendar...</p>
         </div>
       </div>
     );
@@ -147,8 +147,8 @@ function ScheduleContent() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="text-4xl mb-4">❌</div>
-          <p className="text-gray-600">Participant not found</p>
+          <div className="text-6xl mb-4">🌊</div>
+          <p className="text-tropical-navy font-semibold">Participant not found</p>
         </div>
       </div>
     );
@@ -159,30 +159,37 @@ function ScheduleContent() {
   const progress = Math.round((completedDates / totalDates) * 100);
 
   return (
-    <div className="min-h-screen p-4 py-8">
+    <div className="min-h-screen p-4 py-8 animate-fade-in">
       <div className="max-w-3xl mx-auto">
-        {/* Header */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 mb-6 border-4 border-party-pink">
-          <h1 className="text-3xl font-bold text-party-purple mb-2">
-            Hi {participant.name}! 👋
-          </h1>
-          <p className="text-gray-600">
-            Select your availability for March 6-22, 2025
+        {/* Tropical Header */}
+        <div className="bg-gradient-to-r from-tropical-turquoise to-tropical-aqua rounded-3xl shadow-2xl p-6 mb-6 text-white">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-4xl">🌺</span>
+            <h1 className="text-3xl md:text-4xl font-bold">
+              Hi {participant.name}!
+            </h1>
+          </div>
+          <p className="text-white/90 text-lg font-medium mb-4">
+            Select your availability for Ayana's beach bachelorette
           </p>
-
-          {/* Progress Bar */}
-          <div className="mt-4">
-            <div className="flex justify-between text-sm text-gray-600 mb-2">
-              <span>Progress</span>
-              <span>
-                {completedDates}/{totalDates} days
-              </span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
-              <div
-                className="bg-gradient-to-r from-party-pink to-party-purple h-3 rounded-full transition-all"
-                style={{ width: `${progress}%` }}
-              />
+          <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4">
+            <p className="text-white font-semibold mb-1">
+              📅 March 6-22, 2025
+            </p>
+            {/* Progress Bar */}
+            <div className="mt-3">
+              <div className="flex justify-between text-sm text-white/90 mb-2">
+                <span className="font-medium">Progress</span>
+                <span className="font-bold">
+                  {completedDates}/{totalDates} days
+                </span>
+              </div>
+              <div className="w-full bg-white/30 rounded-full h-3">
+                <div
+                  className="bg-white h-3 rounded-full transition-all shadow-lg"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -195,7 +202,7 @@ function ScheduleContent() {
           />
 
           {error && (
-            <div className="mt-6 bg-red-50 border-2 border-red-400 text-red-700 px-4 py-3 rounded-lg">
+            <div className="mt-6 bg-tropical-coral/10 border-2 border-tropical-coral text-tropical-coral px-5 py-4 rounded-2xl font-medium">
               {error}
             </div>
           )}
@@ -205,9 +212,19 @@ function ScheduleContent() {
             <button
               type="submit"
               disabled={saving || completedDates === 0}
-              className="w-full bg-gradient-to-r from-party-pink to-party-purple text-white font-bold py-4 px-6 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 text-lg shadow-xl"
+              className="w-full bg-gradient-to-r from-tropical-turquoise to-tropical-aqua text-white font-bold py-5 px-6 rounded-2xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-lg shadow-xl"
             >
-              {saving ? 'Saving...' : 'Save My Availability 🎉'}
+              {saving ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Saving...
+                </span>
+              ) : (
+                'Save My Availability 🌊'
+              )}
             </button>
           </div>
         </form>
@@ -221,9 +238,9 @@ export default function SchedulePage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <div className="text-4xl mb-4">⏳</div>
-            <p className="text-gray-600">Loading...</p>
+          <div className="text-center animate-fade-in">
+            <div className="text-6xl mb-4">🌴</div>
+            <p className="text-tropical-navy font-semibold text-lg">Loading...</p>
           </div>
         </div>
       }

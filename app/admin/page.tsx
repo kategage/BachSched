@@ -86,10 +86,10 @@ export default function AdminPage() {
   };
 
   const getStatusColor = (status?: 'yes' | 'no' | 'maybe') => {
-    if (status === 'yes') return 'bg-green-500 text-white';
-    if (status === 'no') return 'bg-red-500 text-white';
-    if (status === 'maybe') return 'bg-yellow-400 text-gray-900';
-    return 'bg-gray-300 text-gray-600';
+    if (status === 'yes') return 'bg-tropical-turquoise text-white';
+    if (status === 'no') return 'bg-tropical-coral text-white';
+    if (status === 'maybe') return 'bg-tropical-orange text-white';
+    return 'bg-gray-300 text-gray-700';
   };
 
   const getStatusEmoji = (status?: 'yes' | 'no' | 'maybe') => {
@@ -139,17 +139,23 @@ export default function AdminPage() {
   if (!authenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="max-w-md w-full">
-          <div className="bg-white rounded-2xl shadow-2xl p-8 border-4 border-party-purple">
-            <h1 className="text-3xl font-bold text-party-purple mb-6 text-center">
-              🔒 Admin Dashboard
-            </h1>
+        <div className="max-w-md w-full animate-fade-in">
+          <div className="bg-white rounded-3xl shadow-2xl p-8 border border-tropical-turquoise/30">
+            <div className="text-center mb-6">
+              <div className="text-5xl mb-3">🔒</div>
+              <h1 className="text-3xl font-bold text-tropical-navy mb-2">
+                Admin Dashboard
+              </h1>
+              <p className="text-tropical-teal font-medium">
+                Ayana's Bachelorette - Availability Overview
+              </p>
+            </div>
 
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleLogin} className="space-y-5">
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-semibold text-tropical-navy mb-2"
                 >
                   Password
                 </label>
@@ -158,29 +164,29 @@ export default function AdminPage() {
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-party-purple rounded-lg focus:outline-none focus:ring-2 focus:ring-party-pink text-gray-900"
+                  className="w-full px-5 py-4 border-2 border-tropical-turquoise/40 rounded-xl focus:outline-none focus:ring-4 focus:ring-tropical-turquoise/30 focus:border-tropical-turquoise text-tropical-navy font-medium transition-all"
                   placeholder="Enter admin password"
                 />
               </div>
 
               {error && (
-                <div className="bg-red-50 border-2 border-red-400 text-red-700 px-4 py-3 rounded-lg text-sm">
+                <div className="bg-tropical-coral/10 border-2 border-tropical-coral text-tropical-coral px-5 py-4 rounded-xl text-sm font-medium">
                   {error}
                 </div>
               )}
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-party-purple to-party-pink text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity"
+                className="w-full bg-gradient-to-r from-tropical-turquoise to-tropical-aqua text-white font-bold py-4 px-6 rounded-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg"
               >
-                Login
+                Login 🌴
               </button>
             </form>
 
             <div className="mt-6 text-center">
               <a
                 href="/"
-                className="text-sm text-party-purple hover:text-party-pink transition-colors"
+                className="text-sm text-tropical-teal hover:text-tropical-turquoise transition-colors font-medium"
               >
                 ← Back to Home
               </a>
@@ -195,16 +201,19 @@ export default function AdminPage() {
   const bestPeriods = calculateBestPeriods();
 
   return (
-    <div className="min-h-screen p-4 py-8">
+    <div className="min-h-screen p-4 py-8 animate-fade-in">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 mb-6 border-4 border-party-purple">
-          <div className="flex justify-between items-center">
+        {/* Tropical Header */}
+        <div className="bg-gradient-to-r from-tropical-turquoise to-tropical-aqua rounded-3xl shadow-2xl p-6 mb-6 text-white">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-party-purple mb-2">
-                📊 Admin Dashboard
-              </h1>
-              <p className="text-gray-600">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-4xl">🌴</span>
+                <h1 className="text-3xl md:text-4xl font-bold">
+                  Ayana's Bachelorette
+                </h1>
+              </div>
+              <p className="text-white/90 font-medium ml-14">
                 {participants.length} participants • March 6-22, 2025
               </p>
             </div>
@@ -213,7 +222,7 @@ export default function AdminPage() {
                 setAuthenticated(false);
                 setPassword('');
               }}
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+              className="px-5 py-3 bg-white/20 backdrop-blur-sm text-white rounded-xl hover:bg-white/30 transition-all font-semibold border border-white/30"
             >
               Logout
             </button>
@@ -222,43 +231,46 @@ export default function AdminPage() {
 
         {loading ? (
           <div className="text-center py-12">
-            <div className="text-4xl mb-4">⏳</div>
-            <p className="text-gray-600">Loading data...</p>
+            <div className="text-6xl mb-4">🌊</div>
+            <p className="text-tropical-navy font-semibold text-lg">Loading data...</p>
           </div>
         ) : (
           <>
             {/* Best Periods Section */}
-            <div className="bg-white rounded-2xl shadow-xl p-6 mb-6 border-2 border-party-gold">
-              <h2 className="text-2xl font-bold text-party-purple mb-4">
-                ⭐ Top 5 Best 4-Day Periods
-              </h2>
+            <div className="bg-white rounded-3xl shadow-xl p-6 mb-6 border-2 border-tropical-sand">
+              <div className="flex items-center gap-2 mb-5">
+                <span className="text-3xl">🏆</span>
+                <h2 className="text-2xl font-bold text-tropical-navy">
+                  Top 5 Best 4-Day Periods
+                </h2>
+              </div>
               <div className="space-y-3">
                 {bestPeriods.map((period, index) => (
                   <div
                     key={index}
-                    className={`p-4 rounded-lg border-2 ${
+                    className={`p-5 rounded-2xl border-2 transition-all ${
                       index === 0
-                        ? 'bg-yellow-50 border-party-gold'
-                        : 'bg-gray-50 border-gray-300'
+                        ? 'bg-gradient-to-br from-tropical-sand to-tropical-cream border-tropical-sand shadow-lg'
+                        : 'bg-tropical-sky/30 border-tropical-turquoise/20 hover:border-tropical-turquoise/40'
                     }`}
                   >
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                      <div className="font-bold text-lg text-party-purple">
-                        {index === 0 && '🏆 '}
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                      <div className="font-bold text-lg text-tropical-navy">
+                        {index === 0 && '⭐ '}
                         {formatDisplayDate(period.startDate)} -{' '}
                         {formatDisplayDate(period.endDate)}
                       </div>
-                      <div className="flex gap-4 text-sm">
-                        <span className="text-green-600 font-medium">
+                      <div className="flex flex-wrap gap-3 text-sm font-semibold">
+                        <span className="px-3 py-1 bg-tropical-turquoise/10 text-tropical-turquoise rounded-lg">
                           ✓ {period.yesCount} Yes
                         </span>
-                        <span className="text-yellow-600 font-medium">
+                        <span className="px-3 py-1 bg-tropical-orange/10 text-tropical-orange rounded-lg">
                           ? {period.maybeCount} Maybe
                         </span>
-                        <span className="text-red-600 font-medium">
+                        <span className="px-3 py-1 bg-tropical-coral/10 text-tropical-coral rounded-lg">
                           ✗ {period.noCount} No
                         </span>
-                        <span className="text-gray-600 font-bold">
+                        <span className="px-3 py-1 bg-tropical-navy/10 text-tropical-navy rounded-lg">
                           Score: {period.score.toFixed(1)}
                         </span>
                       </div>
@@ -269,30 +281,33 @@ export default function AdminPage() {
             </div>
 
             {/* Availability Grid */}
-            <div className="bg-white rounded-2xl shadow-xl p-6 border-2 border-party-pink overflow-x-auto">
-              <h2 className="text-2xl font-bold text-party-purple mb-4">
-                📅 Full Availability Grid
-              </h2>
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-tropical-turquoise/20 overflow-x-auto">
+              <div className="flex items-center gap-2 mb-5">
+                <span className="text-3xl">📅</span>
+                <h2 className="text-2xl font-bold text-tropical-navy">
+                  Full Availability Grid
+                </h2>
+              </div>
 
               <div className="overflow-x-auto">
                 <table className="min-w-full border-collapse">
                   <thead>
                     <tr>
-                      <th className="sticky left-0 bg-white border-2 border-gray-300 px-4 py-3 text-left font-bold text-party-purple z-10">
+                      <th className="sticky left-0 bg-white border-2 border-tropical-turquoise/30 px-4 py-3 text-left font-bold text-tropical-navy z-10">
                         Participant
                       </th>
                       {dates.map((date) => (
                         <th
                           key={getDateKey(date)}
-                          className="border-2 border-gray-300 px-2 py-3 text-center text-sm min-w-[80px]"
+                          className="border-2 border-tropical-turquoise/30 px-2 py-3 text-center text-sm min-w-[80px] bg-tropical-sky/30"
                         >
-                          <div className="font-bold text-party-purple">
+                          <div className="font-bold text-tropical-navy">
                             {date.toLocaleDateString('en-US', {
                               month: 'short',
                               day: 'numeric',
                             })}
                           </div>
-                          <div className="text-xs text-gray-600">
+                          <div className="text-xs text-tropical-teal">
                             {date.toLocaleDateString('en-US', {
                               weekday: 'short',
                             })}
@@ -303,8 +318,8 @@ export default function AdminPage() {
                   </thead>
                   <tbody>
                     {participants.map((participant) => (
-                      <tr key={participant.id}>
-                        <td className="sticky left-0 bg-white border-2 border-gray-300 px-4 py-3 font-medium z-10">
+                      <tr key={participant.id} className="hover:bg-tropical-sky/20 transition-colors">
+                        <td className="sticky left-0 bg-white border-2 border-tropical-turquoise/30 px-4 py-3 font-semibold text-tropical-navy z-10">
                           {participant.name}
                         </td>
                         {dates.map((date) => {
@@ -313,7 +328,7 @@ export default function AdminPage() {
                           return (
                             <td
                               key={dateKey}
-                              className={`border-2 border-gray-300 px-2 py-3 text-center font-bold ${getStatusColor(
+                              className={`border-2 border-tropical-turquoise/30 px-2 py-3 text-center font-bold ${getStatusColor(
                                 status
                               )}`}
                             >
@@ -327,22 +342,22 @@ export default function AdminPage() {
                 </table>
               </div>
 
-              <div className="mt-4 flex flex-wrap gap-4 text-sm">
+              <div className="mt-6 flex flex-wrap gap-4 text-sm font-semibold">
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-green-500 rounded"></div>
-                  <span>Yes</span>
+                  <div className="w-5 h-5 bg-tropical-turquoise rounded-lg shadow-sm"></div>
+                  <span className="text-tropical-navy">Yes</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-yellow-400 rounded"></div>
-                  <span>Maybe</span>
+                  <div className="w-5 h-5 bg-tropical-orange rounded-lg shadow-sm"></div>
+                  <span className="text-tropical-navy">Maybe</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-red-500 rounded"></div>
-                  <span>No</span>
+                  <div className="w-5 h-5 bg-tropical-coral rounded-lg shadow-sm"></div>
+                  <span className="text-tropical-navy">No</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-gray-300 rounded"></div>
-                  <span>No Response</span>
+                  <div className="w-5 h-5 bg-gray-300 rounded-lg shadow-sm"></div>
+                  <span className="text-tropical-navy">No Response</span>
                 </div>
               </div>
             </div>
