@@ -166,7 +166,7 @@ function ScheduleContent() {
         <div className="text-center mb-6">
           <div className="text-4xl mb-3">🌺</div>
           <h1 className="font-display font-bold text-2xl mb-2" style={{ color: '#14B8A6' }}>
-            Hi {participant.name}!
+            Hi {participant.name}! ✨
           </h1>
           <p className="text-gray-600 text-sm">
             When can you make it?

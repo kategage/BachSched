@@ -57,7 +57,7 @@ export default function Home() {
 
         {/* Main heading */}
         <h1 className="text-sm tracking-widest text-gray-500 mb-2">
-          WELCOME TO
+          ✨ WELCOME TO ✨
         </h1>
         <h2 className="font-display font-bold text-3xl md:text-4xl mb-4" style={{ color: '#14B8A6' }}>
           AYANA'S BACHELORETTE
@@ -65,7 +65,7 @@ export default function Home() {
 
         {/* Subheading */}
         <p className="text-base font-semibold mb-8" style={{ color: '#FB923C' }}>
-          Beach Getaway • March 6-22, 2025
+          Beach Getaway • March 6-22, 2026
         </p>
 
         {/* Wave divider */}
@@ -124,8 +124,12 @@ export default function Home() {
           </button>
         </form>
 
-        {/* Sun emoji at bottom */}
-        <div className="text-3xl mt-8">☀️</div>
+        {/* Tropical emojis at bottom */}
+        <div className="text-2xl mt-8 space-x-1">
+          <span>✨</span>
+          <span>🌴</span>
+          <span>✨</span>
+        </div>
 
         {/* Admin link */}
         <div className="mt-6">

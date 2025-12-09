@@ -59,7 +59,7 @@ function ConfirmationContent() {
 
         {/* Success heading */}
         <h1 className="font-display font-bold text-3xl mb-4" style={{ color: '#10B981' }}>
-          Success!
+          ✨ Success! ✨
         </h1>
 
         {/* Thank you message */}
@@ -101,10 +101,10 @@ function ConfirmationContent() {
         </a>
 
         {/* Tropical emojis */}
-        <div className="text-2xl mt-8 space-x-2">
+        <div className="text-2xl mt-8 space-x-1">
+          <span>✨</span>
           <span>🌴</span>
-          <span>🌊</span>
-          <span>☀️</span>
+          <span>✨</span>
         </div>
       </div>
     </div>
