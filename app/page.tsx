@@ -50,37 +50,49 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-8">
-      <div className="bg-white shadow-2xl p-12 max-w-2xl w-full border-t-8 rounded-lg" style={{ borderTopColor: '#0A2E4D' }}>
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-8 bg-white">
+      <div className="bg-white shadow-2xl p-8 sm:p-12 w-full max-w-xl border-t-8 rounded-2xl" style={{
+        borderTopColor: '#0A2E4D',
+        boxShadow: '0 25px 50px -12px rgba(10, 46, 77, 0.25)'
+      }}>
 
         {/* Logo/Header */}
-        <div className="text-center mb-10">
-          <div className="text-5xl mb-4">🌊</div>
-          <h1 className="font-serif text-2xl tracking-widest uppercase text-gray-600 mb-3">
+        <div className="text-center mb-8">
+          <div className="text-5xl mb-4">✨</div>
+          <h1 className="font-serif text-xl tracking-widest uppercase text-gray-600 mb-2">
             COASTAL CELEBRATION EXPEDITION
           </h1>
+          <p className="text-xs text-gray-500 mb-4">
+            Expedition Portal • Crew Availability Assessment
+          </p>
           <div className="w-24 h-1 mx-auto mb-5" style={{ backgroundColor: '#62B6CB' }}></div>
-          <h2 className="font-serif text-5xl font-bold mb-4" style={{ color: '#0A2E4D' }}>
+          <h2 className="font-serif text-4xl font-bold mb-4" style={{ color: '#0A2E4D' }}>
             Dr. Ayana Elizabeth Johnson
           </h2>
-          <p className="text-lg text-gray-600 font-light">
-            Potential Expedition Dates: March 6th–22nd 2028
+          <p className="text-base text-gray-600 font-light mb-2">
+            Potential Expedition Dates: March 6th–22nd 2026
+          </p>
+          <p className="text-sm text-gray-500 italic">
+            Tentative Location: Jamaica ✨
           </p>
         </div>
 
         {/* Expedition details box */}
-        <div className="border-l-4 p-6 mb-10 rounded-r-lg" style={{ backgroundColor: '#F9F7F4', borderLeftColor: '#62B6CB' }}>
-          <h3 className="font-semibold mb-3 uppercase text-sm tracking-wider" style={{ color: '#0A2E4D' }}>EXPEDITION DETAILS</h3>
-          <p className="text-gray-700 leading-relaxed">
+        <div className="bg-white border-l-4 border rounded-xl p-6 mb-8 shadow-sm" style={{ borderLeftColor: '#62B6CB' }}>
+          <h3 className="font-bold mb-3 uppercase text-sm tracking-wider" style={{ color: '#0A2E4D' }}>
+            Expedition Details
+          </h3>
+          <p className="text-gray-700 leading-relaxed text-sm">
             Join Dr. Johnson for a coastal celebration combining ocean views,
-            scientific inquiry, and fellowship. We're assembling a crew for a multi-day field study.
+            scientific inquiry, and fellowship. We're assembling a crew for a 4 day field study in March, 2026.
+            Help us identify the ideal conditions for this expedition.
           </p>
         </div>
 
         {/* Application form */}
         <form onSubmit={handleSubmit}>
-          <div className="mb-8">
-            <label htmlFor="name" className="block text-base font-semibold tracking-wider uppercase mb-4" style={{ color: '#0A2E4D' }}>
+          <div className="mb-6">
+            <label htmlFor="name" className="block text-sm font-semibold tracking-wider uppercase mb-3" style={{ color: '#0A2E4D' }}>
               Expedition Member Name
             </label>
             <input
@@ -88,9 +100,9 @@ export default function Home() {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-6 text-xl border-2 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-opacity-50"
+              className="w-full px-5 text-2xl border-2 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-opacity-50 font-medium"
               style={{
-                height: '70px',
+                height: '65px',
                 borderColor: name ? '#0A2E4D' : '#D1D5DB'
               }}
               onFocus={(e) => {
@@ -115,10 +127,11 @@ export default function Home() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full text-white text-xl font-bold tracking-wide transition-all uppercase disabled:opacity-50 disabled:cursor-not-allowed rounded-full shadow-lg hover:shadow-xl"
+            className="w-full text-base font-bold tracking-wide transition-all uppercase disabled:opacity-50 disabled:cursor-not-allowed rounded-lg shadow-md hover:shadow-lg"
             style={{
-              height: '70px',
-              backgroundColor: '#0A2E4D'
+              height: '56px',
+              backgroundColor: '#0A2E4D',
+              color: '#FFFFFF'
             }}
             onMouseEnter={(e) => !loading && (e.currentTarget.style.backgroundColor = '#1B4965')}
             onMouseLeave={(e) => !loading && (e.currentTarget.style.backgroundColor = '#0A2E4D')}
@@ -127,8 +140,8 @@ export default function Home() {
           </button>
         </form>
 
-        <div className="text-center mt-10 text-sm text-gray-500 italic">
-          <p>🌊 Sustainable celebration planning • Ocean-friendly gathering</p>
+        <div className="text-center mt-8 text-sm text-gray-500 italic">
+          <p>✨ Sustainable celebration planning • Ocean-friendly gathering</p>
         </div>
 
         {/* Admin link */}

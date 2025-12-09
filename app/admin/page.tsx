@@ -222,7 +222,7 @@ export default function AdminPage() {
                 Dr. Ayana Elizabeth Johnson • Beach Celebration Expedition
               </p>
               <p className="text-sm text-gray-500 mt-1">
-                {participants.length} crew members • March 6-22, 2028
+                {participants.length} crew members • March 6-22, 2026
               </p>
             </div>
             <button
