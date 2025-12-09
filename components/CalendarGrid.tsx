@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { getAllDates, formatDisplayDate, getDateKey } from '@/lib/dates';
-import { getTideDataForDate, formatTideDisplay } from '@/lib/tideData';
+import { getTideDataForDate } from '@/lib/tideData';
+import TideSummary from './TideSummary';
 
 interface CalendarGridProps {
   availability: Record<string, 'yes' | 'no' | 'maybe'>;
@@ -59,15 +60,22 @@ export default function CalendarGrid({
           ))}
         </div>
 
-        {/* Tide info toggle */}
+        {/* Tide info toggle - styled as a modern pill */}
         <button
           type="button"
           onClick={() => setShowTideInfo(!showTideInfo)}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-white border border-gray-300 hover:border-gray-400 transition-all"
-          style={{ color: '#0A2E4D' }}
+          className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all shadow-sm ${
+            showTideInfo
+              ? 'bg-blue-50 border-2 hover:bg-blue-100'
+              : 'bg-white border-2 border-gray-300 hover:border-gray-400'
+          }`}
+          style={{
+            borderColor: showTideInfo ? '#62B6CB' : undefined,
+            color: '#0A2E4D'
+          }}
         >
-          <span>{showTideInfo ? '▼' : '▶'}</span>
-          <span>Show Field Conditions (Tides)</span>
+          <span className="text-sm">{showTideInfo ? '▼' : '▶'}</span>
+          <span>Field Conditions</span>
         </button>
       </div>
 
@@ -97,21 +105,11 @@ export default function CalendarGrid({
 
                   {/* Tide info (desktop) */}
                   {showTideInfo && tideData && (
-                    <div className="mt-3 pt-3 border-t border-gray-100 space-y-1">
-                      <div className="flex items-start gap-1.5 text-xs">
-                        <span className="text-blue-600">🌊</span>
-                        <div>
-                          <span className="font-medium text-gray-700">High:</span>{' '}
-                          <span className="text-gray-600">{formatTideDisplay(tideData.highTides)}</span>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-1.5 text-xs">
-                        <span className="text-gray-500">●</span>
-                        <div>
-                          <span className="font-medium text-gray-700">Low:</span>{' '}
-                          <span className="text-gray-600">{formatTideDisplay(tideData.lowTides)}</span>
-                        </div>
-                      </div>
+                    <div className="mt-3 pt-3 border-t border-gray-100">
+                      <TideSummary
+                        highTides={tideData.highTides}
+                        lowTides={tideData.lowTides}
+                      />
                     </div>
                   )}
                 </div>
@@ -198,21 +196,11 @@ export default function CalendarGrid({
 
                 {/* Tide info (mobile) */}
                 {showTideInfo && tideData && (
-                  <div className="pt-2 border-t border-gray-100 space-y-1">
-                    <div className="flex items-start gap-1.5 text-xs">
-                      <span className="text-blue-600">🌊</span>
-                      <div>
-                        <span className="font-medium text-gray-700">High:</span>{' '}
-                        <span className="text-gray-600">{formatTideDisplay(tideData.highTides)}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-1.5 text-xs">
-                      <span className="text-gray-500">●</span>
-                      <div>
-                        <span className="font-medium text-gray-700">Low:</span>{' '}
-                        <span className="text-gray-600">{formatTideDisplay(tideData.lowTides)}</span>
-                      </div>
-                    </div>
+                  <div className="pt-2 border-t border-gray-100">
+                    <TideSummary
+                      highTides={tideData.highTides}
+                      lowTides={tideData.lowTides}
+                    />
                   </div>
                 )}
 
