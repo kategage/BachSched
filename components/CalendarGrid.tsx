@@ -18,25 +18,25 @@ export default function CalendarGrid({
     const isSelected = currentStatus === status;
 
     const baseClass =
-      'min-h-[44px] px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 border-2 touch-manipulation active:scale-95';
+      'min-h-[48px] px-5 py-3 rounded-lg font-medium text-sm transition-all duration-200 border-3 touch-manipulation flex-1';
 
     if (isSelected) {
       if (status === 'yes') {
-        return `${baseClass} bg-tropical-turquoise text-white border-tropical-turquoise shadow-lg shadow-tropical-turquoise/30 hover:shadow-xl`;
-      }
-      if (status === 'no') {
-        return `${baseClass} bg-tropical-coral text-white border-tropical-coral shadow-lg shadow-tropical-coral/30 hover:shadow-xl`;
+        return `${baseClass} bg-primary text-white border-primary scale-105 shadow-sm`;
       }
       if (status === 'maybe') {
-        return `${baseClass} bg-tropical-orange text-white border-tropical-orange shadow-lg shadow-tropical-orange/30 hover:shadow-xl`;
+        return `${baseClass} bg-warning text-gray-900 border-warning scale-105 shadow-sm`;
+      }
+      if (status === 'no') {
+        return `${baseClass} bg-muted text-gray-700 border-muted scale-105 shadow-sm`;
       }
     }
 
-    return `${baseClass} bg-white text-tropical-navy border-tropical-turquoise/30 hover:border-tropical-turquoise hover:bg-tropical-sky/50`;
+    return `${baseClass} bg-white text-gray-600 border-gray-200 hover:border-gray-300 hover:bg-gray-50`;
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {dates.map((date) => {
         const dateKey = getDateKey(date);
         const displayDate = formatDisplayDate(date);
@@ -44,47 +44,38 @@ export default function CalendarGrid({
         return (
           <div
             key={dateKey}
-            className="bg-white rounded-2xl p-5 shadow-md hover:shadow-lg transition-shadow border border-tropical-turquoise/20"
+            className="bg-white rounded-xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_6px_rgba(0,0,0,0.1)] transition-shadow"
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               {/* Date Display */}
               <div className="flex-shrink-0">
-                <p className="font-bold text-lg text-tropical-navy">
+                <p className="font-semibold text-base text-gray-900">
                   {displayDate}
                 </p>
               </div>
 
               {/* Status Buttons */}
-              <div className="flex gap-2 flex-wrap sm:flex-nowrap">
+              <div className="flex gap-3 w-full sm:w-auto">
                 <button
                   type="button"
                   onClick={() => onStatusChange(dateKey, 'yes')}
                   className={getButtonClass(dateKey, 'yes')}
                 >
-                  <span className="flex items-center gap-1">
-                    <span>✓</span>
-                    <span>Yes</span>
-                  </span>
+                  Yes
                 </button>
                 <button
                   type="button"
                   onClick={() => onStatusChange(dateKey, 'maybe')}
                   className={getButtonClass(dateKey, 'maybe')}
                 >
-                  <span className="flex items-center gap-1">
-                    <span>?</span>
-                    <span>Maybe</span>
-                  </span>
+                  Maybe
                 </button>
                 <button
                   type="button"
                   onClick={() => onStatusChange(dateKey, 'no')}
                   className={getButtonClass(dateKey, 'no')}
                 >
-                  <span className="flex items-center gap-1">
-                    <span>✗</span>
-                    <span>No</span>
-                  </span>
+                  No
                 </button>
               </div>
             </div>

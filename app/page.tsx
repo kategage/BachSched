@@ -50,34 +50,32 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="max-w-lg w-full animate-fade-in">
-        {/* Tropical Hero Header */}
-        <div className="bg-gradient-to-r from-tropical-turquoise via-tropical-aqua to-tropical-coral rounded-3xl shadow-2xl p-8 mb-6 wave-divider text-center">
-          <div className="text-6xl mb-3">🌴</div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight">
-            WELCOME TO AYANA'S
-          </h1>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            BACHELORETTE 🌊
-          </h2>
-          <p className="text-white/90 text-lg font-medium">
-            Help us plan Ayana's beach bachelorette!
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="w-full max-w-2xl animate-fade-in">
+        {/* Clean Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="text-2xl">🌴</span>
+            <h1 className="font-display font-bold text-5xl md:text-6xl text-gray-900 tracking-tight">
+              Ayana's Bachelorette
+            </h1>
+          </div>
+          <p className="text-lg text-gray-600 max-w-lg mx-auto">
+            Help us plan the perfect celebration by sharing your availability
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-xl p-8 border border-tropical-turquoise/20">
-          {/* Info Card */}
-          <div className="mb-8 p-5 bg-gradient-to-br from-tropical-sky to-tropical-cream rounded-2xl border-2 border-tropical-turquoise/30">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <span className="text-2xl">📅</span>
-              <p className="text-lg font-bold text-tropical-navy">
+        <div className="bg-white rounded-xl p-8 md:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
+          {/* Date Range Info */}
+          <div className="mb-8 p-4 bg-gray-50 rounded-lg">
+            <div className="flex items-center justify-center gap-2">
+              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p className="font-semibold text-gray-900">
                 March 6-22, 2025
               </p>
             </div>
-            <p className="text-sm text-tropical-teal text-center font-medium">
-              Select your availability for Ayana's celebration! 🍹
-            </p>
           </div>
 
           {/* Form */}
@@ -85,7 +83,7 @@ export default function Home() {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-semibold text-tropical-navy mb-2"
+                className="block text-sm font-semibold text-gray-900 mb-2"
               >
                 Your Name
               </label>
@@ -94,14 +92,14 @@ export default function Home() {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-5 py-4 border-2 border-tropical-turquoise/40 rounded-xl focus:outline-none focus:ring-4 focus:ring-tropical-turquoise/30 focus:border-tropical-turquoise text-tropical-navy font-medium transition-all placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
                 placeholder="Enter your name"
                 disabled={loading}
               />
             </div>
 
             {error && (
-              <div className="bg-tropical-coral/10 border-2 border-tropical-coral text-tropical-coral px-5 py-4 rounded-xl text-sm font-medium">
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
                 {error}
               </div>
             )}
@@ -109,7 +107,7 @@ export default function Home() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-tropical-turquoise to-tropical-aqua text-white font-bold py-5 px-6 rounded-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed text-lg shadow-lg"
+              className="w-full bg-primary text-white font-semibold py-4 px-6 rounded-lg hover:bg-primary/90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -120,15 +118,15 @@ export default function Home() {
                   Loading...
                 </span>
               ) : (
-                'Continue to Calendar 🌺'
+                'Continue to Calendar'
               )}
             </button>
           </form>
 
           {/* Info */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-tropical-teal font-medium">
-              ✨ You'll get a unique link to edit your availability anytime!
+            <p className="text-sm text-gray-600">
+              You'll receive a unique link to edit your availability anytime
             </p>
           </div>
         </div>
@@ -137,7 +135,7 @@ export default function Home() {
         <div className="text-center mt-6">
           <a
             href="/admin"
-            className="text-sm text-tropical-teal hover:text-tropical-turquoise transition-colors font-medium inline-flex items-center gap-1"
+            className="text-sm text-gray-600 hover:text-primary transition-colors"
           >
             Admin Dashboard →
           </a>

@@ -9,18 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'tropical-turquoise': '#40E0D0',
-        'tropical-aqua': '#00CED1',
-        'tropical-coral': '#FF7F50',
-        'tropical-sand': '#F5DEB3',
-        'tropical-orange': '#FF6B6B',
-        'tropical-cream': '#FFF9F0',
-        'tropical-sky': '#F0F8FF',
-        'tropical-teal': '#008B8B',
-        'tropical-navy': '#1A365D',
+        'primary': '#06B6D4',
+        'secondary': '#FB923C',
+        'accent': '#0EA5E9',
+        'success': '#10B981',
+        'warning': '#FBBF24',
+        'muted': '#E5E7EB',
       },
       fontFamily: {
-        'tropical': ['Poppins', 'sans-serif'],
+        'sans': ['Inter', 'sans-serif'],
+        'display': ['Plus Jakarta Sans', 'sans-serif'],
       },
     },
   },
