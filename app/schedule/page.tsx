@@ -146,11 +146,11 @@ function ScheduleContent() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center animate-fade-in">
-          <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#14B8A6' }} viewBox="0 0 24 24">
+          <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#0A2E4D' }} viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          <p className="text-white font-semibold">Loading your calendar...</p>
+          <p className="text-black font-semibold">Loading your assessment...</p>
         </div>
       </div>
     );
@@ -160,7 +160,7 @@ function ScheduleContent() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-white font-semibold">Participant not found</p>
+          <p className="text-black font-semibold">Participant not found</p>
         </div>
       </div>
     );
@@ -170,42 +170,64 @@ function ScheduleContent() {
   const totalDates = getAllDates().length;
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="portal-card animate-fade-in" style={{ maxHeight: '90vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+    <div className="min-h-screen py-8 px-4">
+      <div className="max-w-4xl mx-auto">
+
         {/* Header */}
-        <div className="text-center mb-6">
-          <div className="text-7xl mb-3 animate-pulse">✨🌺✨</div>
-          <h1 className="font-display font-bold text-4xl mb-3 bg-gradient-to-r from-teal-600 via-cyan-500 to-orange-500 bg-clip-text text-transparent">
-            Hi {participant.name}!
+        <div className="bg-white border-t-8 p-8 mb-8 text-center" style={{ borderTopColor: '#0A2E4D' }}>
+          <h1 className="font-serif text-3xl mb-2" style={{ color: '#0A2E4D' }}>
+            Expedition Availability Assessment
           </h1>
-          <p className="text-2xl font-bold mb-2 bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
-            When can you make it? 🏖️
+          <p className="text-lg text-gray-700 mb-4">
+            Welcome, <span className="font-semibold">{participant.name}</span>
           </p>
-          <p className="text-gray-600 text-sm mt-2">
-            Select your availability for each day below
+          <p className="text-gray-600">
+            Mark your availability for each field study date using the tide chart below.
+            Select your tide level: High Tide (Available), Mid Tide (Possible), or Low Tide (Unavailable).
           </p>
         </div>
 
-        {/* Progress */}
-        <div className="mb-6 pb-4 border-b border-gray-100">
-          <div className="flex items-center justify-between text-xs text-gray-600 mb-2">
-            <span>{completedDates} of {totalDates} days selected</span>
-            <span>{Math.round((completedDates / totalDates) * 100)}%</span>
+        {/* Progress indicator */}
+        <div className="bg-white p-6 mb-6 border-l-4" style={{ borderLeftColor: '#F9D949' }}>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-700">
+              <span className="text-3xl font-bold" style={{ color: '#0A2E4D' }}>{completedDates}</span> of {totalDates} dates assessed
+            </span>
+            <span className="text-gray-500">{Math.round((completedDates/totalDates)*100)}% complete</span>
           </div>
-          <div className="w-full bg-gray-100 rounded-full h-2">
+          <div className="w-full bg-gray-200 h-2 mt-3">
             <div
-              className="h-2 rounded-full transition-all"
+              className="h-2 transition-all duration-300"
               style={{
-                width: `${(completedDates / totalDates) * 100}%`,
-                backgroundColor: '#10B981'
+                width: `${(completedDates/totalDates)*100}%`,
+                backgroundColor: '#F9D949'
               }}
-            />
+            ></div>
           </div>
         </div>
 
-        {/* Scrollable Calendar */}
-        <form onSubmit={handleSubmit} style={{ flex: 1, overflow: 'auto', minHeight: 0 }}>
-          <div className="pr-2" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+        {/* Legend */}
+        <div className="bg-white p-6 mb-6 flex justify-around text-center">
+          <div>
+            <div className="w-16 h-16 mx-auto mb-2 rounded-full flex items-center justify-center text-white text-2xl" style={{ backgroundColor: '#0A2E4D' }}>🌊</div>
+            <p className="font-semibold" style={{ color: '#0A2E4D' }}>High Tide</p>
+            <p className="text-sm text-gray-600">Available</p>
+          </div>
+          <div>
+            <div className="w-16 h-16 mx-auto mb-2 rounded-full flex items-center justify-center text-2xl" style={{ backgroundColor: '#F9D949' }}>〰️</div>
+            <p className="font-semibold text-gray-700">Mid Tide</p>
+            <p className="text-sm text-gray-600">Possible</p>
+          </div>
+          <div>
+            <div className="w-16 h-16 bg-gray-300 mx-auto mb-2 rounded-full flex items-center justify-center text-2xl">○</div>
+            <p className="font-semibold text-gray-500">Low Tide</p>
+            <p className="text-sm text-gray-600">Unavailable</p>
+          </div>
+        </div>
+
+        {/* Tide chart grid */}
+        <form onSubmit={handleSubmit}>
+          <div className="mb-8">
             <CalendarGrid
               availability={availability}
               onStatusChange={handleStatusChange}
@@ -213,36 +235,42 @@ function ScheduleContent() {
           </div>
 
           {error && (
-            <div className="mt-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-red-50 border-l-4 border-red-600 text-red-700 px-4 py-3 mb-6">
               {error}
             </div>
           )}
 
-          {/* Submit Button */}
-          <div className="mt-6 pt-4 border-t border-gray-100">
+          {/* Submit button */}
+          <div className="bg-white p-8 text-center">
             <button
               type="submit"
-              disabled={saving || completedDates === 0}
-              className="w-full h-14 text-white font-bold rounded-lg hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+              disabled={saving || completedDates !== totalDates}
+              className="w-full max-w-md h-16 text-lg font-semibold tracking-wide uppercase transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
-                backgroundColor: '#FB923C',
-                minHeight: '56px'
+                backgroundColor: completedDates === totalDates ? '#0A2E4D' : '#D1D5DB',
+                color: completedDates === totalDates ? '#FFFFFF' : '#6B7280'
+              }}
+              onMouseEnter={(e) => {
+                if (completedDates === totalDates && !saving) {
+                  e.currentTarget.style.backgroundColor = '#000000';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (completedDates === totalDates && !saving) {
+                  e.currentTarget.style.backgroundColor = '#0A2E4D';
+                }
               }}
             >
-              {saving ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Saving...
-                </span>
-              ) : (
-                'Submit My Availability 🏖️'
-              )}
+              {saving ? 'Submitting...' : 'Submit Expedition Application →'}
             </button>
+            {completedDates !== totalDates && (
+              <p className="text-sm text-gray-500 mt-3">
+                Please assess all {totalDates - completedDates} remaining dates to continue
+              </p>
+            )}
           </div>
         </form>
+
       </div>
     </div>
   );
@@ -254,11 +282,11 @@ export default function SchedulePage() {
       fallback={
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center animate-fade-in">
-            <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#14B8A6' }} viewBox="0 0 24 24">
+            <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#0A2E4D' }} viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <p className="text-white font-semibold">Loading...</p>
+            <p className="text-black font-semibold">Loading...</p>
           </div>
         </div>
       }

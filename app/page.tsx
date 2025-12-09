@@ -50,52 +50,59 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-lg w-full transform hover:scale-[1.02] transition-transform duration-300">
-        {/* Larger emoji header with animation */}
-        <div className="text-8xl text-center mb-4 animate-bounce-slow">✨🌴✨</div>
+    <div className="min-h-screen flex items-center justify-center p-8">
+      <div className="bg-white shadow-2xl p-12 max-w-2xl w-full border-t-8" style={{ borderTopColor: '#0A2E4D' }}>
 
-        {/* Main heading */}
-        <h1 className="text-4xl font-bold text-center mb-2 text-gray-800">
-          WELCOME TO
-        </h1>
-        <h2 className="text-5xl font-bold text-center mb-4 bg-gradient-to-r from-teal-600 via-cyan-500 to-orange-500 bg-clip-text text-transparent">
-          AYANA'S BACHELORETTE
-        </h2>
+        {/* Logo/Header */}
+        <div className="text-center mb-8">
+          <div className="text-5xl mb-4">🌊</div>
+          <h1 className="font-serif text-2xl tracking-wide text-black mb-2">
+            COASTAL CELEBRATION EXPEDITION
+          </h1>
+          <div className="w-24 h-1 mx-auto mb-4" style={{ backgroundColor: '#F9D949' }}></div>
+          <h2 className="font-serif text-4xl font-bold mb-3" style={{ color: '#0A2E4D' }}>
+            Dr. Ayana Elizabeth Johnson
+          </h2>
+          <p className="text-lg text-gray-700 font-light">
+            Beach Research Site • March 6–22, 2026
+          </p>
+        </div>
 
-        {/* Subheading with more emojis */}
-        <p className="text-2xl text-center mb-8 font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
-          🏖️ Beach Getaway 🌊<br />
-          March 6-22, 2026 ☀️
-        </p>
+        {/* Expedition details box */}
+        <div className="border-l-4 p-6 mb-8" style={{ backgroundColor: '#F9F7F4', borderLeftColor: '#F9D949' }}>
+          <h3 className="font-semibold mb-2" style={{ color: '#0A2E4D' }}>EXPEDITION DETAILS</h3>
+          <p className="text-gray-700 leading-relaxed">
+            Join Dr. Johnson for a coastal celebration combining ocean views,
+            scientific inquiry, and fellowship. We're assembling a crew of 15
+            expedition members for a multi-day field study.
+          </p>
+        </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <label
-              htmlFor="name"
-              className="block text-lg font-bold text-gray-700"
-            >
-              Your Name
+        {/* Application form */}
+        <form onSubmit={handleSubmit}>
+          <div className="mb-8">
+            <label htmlFor="name" className="block text-sm font-semibold tracking-wide mb-3" style={{ color: '#0A2E4D' }}>
+              EXPEDITION MEMBER NAME
             </label>
             <input
               type="text"
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-5 text-lg rounded-2xl border-3 focus:outline-none focus:ring-4 text-gray-900 placeholder:text-gray-400 transition-all"
+              className="w-full h-14 px-4 text-lg border-2 border-gray-300 transition-all"
               style={{
-                height: '64px',
-                borderWidth: '3px',
-                borderColor: '#14B8A6'
+                outline: 'none',
+                borderColor: name ? '#0A2E4D' : '#D1D5DB'
               }}
+              onFocus={(e) => e.target.style.borderColor = '#0A2E4D'}
+              onBlur={(e) => e.target.style.borderColor = name ? '#0A2E4D' : '#D1D5DB'}
               placeholder="Enter your full name"
               disabled={loading}
             />
           </div>
 
           {error && (
-            <div className="bg-red-50 border-2 border-red-300 text-red-700 px-4 py-3 rounded-xl text-sm font-semibold">
+            <div className="bg-red-50 border-l-4 border-red-600 text-red-700 px-4 py-3 mb-6">
               {error}
             </div>
           )}
@@ -103,38 +110,31 @@ export default function Home() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xl"
+            className="w-full h-14 text-white text-lg font-semibold tracking-wide transition-all uppercase disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
-              height: '64px',
-              background: 'linear-gradient(to right, #14B8A6, #0D9488)'
+              backgroundColor: '#0A2E4D'
             }}
+            onMouseEnter={(e) => !loading && (e.currentTarget.style.backgroundColor = '#000000')}
+            onMouseLeave={(e) => !loading && (e.currentTarget.style.backgroundColor = '#0A2E4D')}
           >
-            {loading ? (
-              <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Loading...
-              </span>
-            ) : (
-              "Let's Go! 🏖️"
-            )}
+            {loading ? 'Loading...' : 'Begin Availability Assessment →'}
           </button>
         </form>
 
-        {/* Big tropical emojis at bottom */}
-        <div className="text-5xl text-center mt-8">🌺✨🍹</div>
+        <div className="text-center mt-8 text-sm text-gray-500">
+          <p>🌊 Sustainable celebration planning • Ocean-friendly gathering</p>
+        </div>
 
         {/* Admin link */}
         <div className="mt-6 text-center">
           <a
             href="/admin"
-            className="text-xs text-gray-400 hover:text-teal-500 transition-colors"
+            className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
           >
             Admin Dashboard
           </a>
         </div>
+
       </div>
     </div>
   );
