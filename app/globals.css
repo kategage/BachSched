@@ -1,28 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --primary-teal: #14B8A6;
-  --secondary-coral: #FB923C;
-  --tropical-green: #10B981;
-  --tropical-yellow: #FBBF24;
-  --tropical-pink: #FB7185;
-  --text-dark: #1F2937;
-  --text-light: #6B7280;
-  --card-background: #FFFFFF;
+  /* Primary */
+  --deep-ocean: #0A2E4D;
+  --black: #000000;
+  --white: #FFFFFF;
+  --cream: #F9F7F4;
+
+  /* Accents */
+  --sunshine-yellow: #F9D949;
+  --ocean-mid: #1B4965;
+  --ocean-light: #62B6CB;
+  --coral-accent: #FF6B6B;
+
+  /* Tide states */
+  --high-tide: #0A2E4D;
+  --mid-tide: #F9D949;
+  --low-tide: #E5E5E5;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(135deg, #06B6D4 0%, #14B8A6 50%, #FB923C 100%);
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  background: var(--cream);
   min-height: 100vh;
-  color: var(--text-dark);
+  color: var(--black);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
+}
+
+/* Font utilities */
+.font-serif {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
 }
 
 /* Portal Card Styling */
@@ -31,7 +44,7 @@ body {
   max-width: 480px;
   margin: auto;
   padding: 48px 32px;
-  border-radius: 24px;
+  border-radius: 0;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
@@ -39,7 +52,6 @@ body {
   .portal-card {
     padding: 24px;
     margin: 16px;
-    border-radius: 20px;
   }
 }
 
