@@ -51,21 +51,22 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-lg w-full">
-        {/* Larger emoji header */}
-        <div className="text-7xl text-center mb-4">✨🌴✨</div>
+      <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-lg w-full transform hover:scale-[1.02] transition-transform duration-300">
+        {/* Larger emoji header with animation */}
+        <div className="text-8xl text-center mb-4 animate-bounce-slow">✨🌴✨</div>
 
         {/* Main heading */}
         <h1 className="text-4xl font-bold text-center mb-2 text-gray-800">
           WELCOME TO
         </h1>
-        <h2 className="text-5xl font-bold text-center mb-6 bg-gradient-to-r from-teal-600 to-orange-500 bg-clip-text text-transparent">
+        <h2 className="text-5xl font-bold text-center mb-4 bg-gradient-to-r from-teal-600 via-cyan-500 to-orange-500 bg-clip-text text-transparent">
           AYANA'S BACHELORETTE
         </h2>
 
-        {/* Subheading */}
-        <p className="text-xl text-center mb-8 text-orange-500 font-bold">
-          🌊 Beach Getaway • March 6-22, 2026 ☀️
+        {/* Subheading with more emojis */}
+        <p className="text-2xl text-center mb-8 font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
+          🏖️ Beach Getaway 🌊<br />
+          March 6-22, 2026 ☀️
         </p>
 
         {/* Form */}

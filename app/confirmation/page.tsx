@@ -53,22 +53,22 @@ function ConfirmationContent() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-lg w-full animate-fade-in text-center">
-        {/* Big sparkles emoji */}
-        <div className="text-7xl mb-4">✨🎉✨</div>
+      <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-lg w-full animate-fade-in text-center transform hover:scale-[1.02] transition-transform duration-300">
+        {/* Big sparkles emoji with animation */}
+        <div className="text-8xl mb-4 animate-bounce-slow">✨🎉✨</div>
 
         {/* Success heading */}
-        <h1 className="font-display font-bold text-5xl mb-4 bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+        <h1 className="font-display font-bold text-6xl mb-4 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
           Success!
         </h1>
 
         {/* Thank you message */}
-        <p className="text-gray-700 text-xl font-bold mb-2">
+        <p className="text-2xl font-bold mb-3 bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
           Thanks for responding{participant?.name ? `, ${participant.name}` : ''}! 🌺
         </p>
 
         <p className="text-gray-600 text-lg mb-8">
-          Your availability has been saved for Ayana's beach bachelorette.
+          Your availability has been saved for Ayana's beach bachelorette! 🏖️
         </p>
 
         {/* Divider */}
