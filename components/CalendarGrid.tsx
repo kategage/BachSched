@@ -18,66 +18,75 @@ export default function CalendarGrid({
     const isSelected = currentStatus === status;
 
     const baseClass =
-      'min-h-[48px] px-5 py-3 rounded-lg font-semibold transition-all duration-200 border-2 touch-manipulation flex-1';
+      'min-h-[48px] px-4 py-2.5 rounded-lg font-semibold transition-all duration-200 touch-manipulation flex-1 text-sm';
 
     if (isSelected) {
       if (status === 'yes') {
-        return `${baseClass} bg-[#14B8A6] text-white border-[#14B8A6]`;
+        return `${baseClass} text-white shadow-md` + ' bg-[#10B981]'; // Emerald green
       }
       if (status === 'maybe') {
-        return `${baseClass} bg-[#FCD34D] text-gray-900 border-[#FCD34D]`;
+        return `${baseClass} text-gray-900 shadow-md` + ' bg-[#FBBF24]'; // Sunshine yellow
       }
       if (status === 'no') {
-        return `${baseClass} bg-[#FB7185] text-white border-[#FB7185]`;
+        return `${baseClass} text-white shadow-md` + ' bg-[#FB7185]'; // Coral pink
       }
     }
 
-    return `${baseClass} bg-white text-gray-600 border-[#E5E7EB] hover:border-gray-400 hover:bg-gray-50`;
+    return `${baseClass} bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100`;
+  };
+
+  const getStatusEmoji = (status: 'yes' | 'no' | 'maybe') => {
+    if (status === 'yes') return '✓';
+    if (status === 'maybe') return '~';
+    if (status === 'no') return '✗';
+    return '';
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {dates.map((date) => {
         const dateKey = getDateKey(date);
         const displayDate = formatDisplayDate(date);
+        const currentStatus = availability[dateKey];
 
         return (
           <div
             key={dateKey}
-            className="bg-white rounded-xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_6px_rgba(0,0,0,0.1)] transition-shadow"
+            className="bg-white rounded-xl p-4 border border-gray-100"
           >
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              {/* Date Display */}
-              <div className="flex-shrink-0">
-                <p className="font-semibold text-base text-gray-900">
-                  {displayDate}
-                </p>
-              </div>
+            {/* Date Header */}
+            <div className="mb-3">
+              <p className="font-semibold text-sm text-gray-700">
+                {displayDate}
+              </p>
+            </div>
 
-              {/* Status Buttons */}
-              <div className="flex gap-3 w-full sm:w-auto">
-                <button
-                  type="button"
-                  onClick={() => onStatusChange(dateKey, 'yes')}
-                  className={getButtonClass(dateKey, 'yes')}
-                >
-                  Yes
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onStatusChange(dateKey, 'maybe')}
-                  className={getButtonClass(dateKey, 'maybe')}
-                >
-                  Maybe
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onStatusChange(dateKey, 'no')}
-                  className={getButtonClass(dateKey, 'no')}
-                >
-                  No
-                </button>
-              </div>
+            {/* Status Buttons - Horizontal */}
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => onStatusChange(dateKey, 'yes')}
+                className={getButtonClass(dateKey, 'yes')}
+              >
+                {currentStatus === 'yes' && getStatusEmoji('yes') + ' '}
+                Yes
+              </button>
+              <button
+                type="button"
+                onClick={() => onStatusChange(dateKey, 'maybe')}
+                className={getButtonClass(dateKey, 'maybe')}
+              >
+                {currentStatus === 'maybe' && getStatusEmoji('maybe') + ' '}
+                Maybe
+              </button>
+              <button
+                type="button"
+                onClick={() => onStatusChange(dateKey, 'no')}
+                className={getButtonClass(dateKey, 'no')}
+              >
+                {currentStatus === 'no' && getStatusEmoji('no') + ' '}
+                No
+              </button>
             </div>
           </div>
         );
