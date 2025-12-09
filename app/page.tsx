@@ -52,31 +52,31 @@ export default function Home() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="portal-card animate-fade-in text-center">
-        {/* Palm tree emoji at top */}
-        <div className="text-5xl mb-6">🌴</div>
+        {/* Big emoji group at top */}
+        <div className="text-6xl mb-6">✨🌴✨</div>
 
         {/* Main heading */}
-        <h1 className="text-sm tracking-widest text-gray-500 mb-2">
-          ✨ WELCOME TO ✨
+        <h1 className="text-lg tracking-widest text-gray-500 mb-2 font-semibold">
+          WELCOME TO
         </h1>
-        <h2 className="font-display font-bold text-3xl md:text-4xl mb-4" style={{ color: '#14B8A6' }}>
+        <h2 className="font-display font-bold text-4xl md:text-5xl mb-4" style={{ color: '#14B8A6' }}>
           AYANA'S BACHELORETTE
         </h2>
 
         {/* Subheading */}
-        <p className="text-base font-semibold mb-8" style={{ color: '#FB923C' }}>
-          Beach Getaway • March 6-22, 2026
+        <p className="text-lg font-bold mb-8" style={{ color: '#FB923C' }}>
+          🌊 Beach Getaway • March 6-22, 2026 ☀️
         </p>
 
         {/* Wave divider */}
-        <div className="text-3xl mb-8">🌊</div>
+        <div className="text-4xl mb-8">🌺</div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="text-left">
             <label
               htmlFor="name"
-              className="block text-base font-semibold text-gray-700 mb-2"
+              className="block text-lg font-bold text-gray-700 mb-3"
             >
               Your Name
             </label>
@@ -85,18 +85,18 @@ export default function Home() {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full h-14 px-4 border-2 rounded-lg focus:outline-none focus:ring-4 text-gray-900 text-base placeholder:text-gray-400 transition-all"
+              className="w-full px-4 border-2 rounded-xl focus:outline-none focus:ring-4 text-gray-900 text-lg placeholder:text-gray-400 transition-all"
               style={{
                 borderColor: '#14B8A6',
-                minHeight: '56px'
+                height: '56px'
               }}
-              placeholder="Enter your name"
+              placeholder="Enter your full name"
               disabled={loading}
             />
           </div>
 
           {error && (
-            <div className="bg-red-50 border-2 border-red-300 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-red-50 border-2 border-red-300 text-red-700 px-4 py-3 rounded-xl text-sm font-semibold">
               {error}
             </div>
           )}
@@ -104,10 +104,10 @@ export default function Home() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full h-14 text-white font-bold rounded-lg hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-base"
+            className="w-full text-white font-bold rounded-xl hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-lg"
             style={{
               backgroundColor: '#14B8A6',
-              minHeight: '56px'
+              height: '56px'
             }}
           >
             {loading ? (
@@ -124,12 +124,8 @@ export default function Home() {
           </button>
         </form>
 
-        {/* Tropical emojis at bottom */}
-        <div className="text-2xl mt-8 space-x-1">
-          <span>✨</span>
-          <span>🌴</span>
-          <span>✨</span>
-        </div>
+        {/* Big tropical emojis at bottom */}
+        <div className="text-5xl mt-8">🏖️✨🍹</div>
 
         {/* Admin link */}
         <div className="mt-6">
