@@ -53,11 +53,11 @@ function ConfirmationContent() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-8">
-      <div className="bg-white p-12 max-w-2xl w-full border-t-8 text-center rounded-lg shadow-2xl" style={{ borderTopColor: '#B7E3E0' }}>
+      <div className="bg-white p-12 max-w-2xl w-full border-t-8 text-center rounded-lg shadow-2xl" style={{ borderTopColor: '#0A2E4D' }}>
 
         <div className="text-7xl mb-6">✓</div>
 
-        <h1 className="font-serif text-4xl mb-4" style={{ color: '#05324F' }}>
+        <h1 className="font-serif text-4xl mb-4" style={{ color: '#0A2E4D' }}>
           Expedition Application Submitted
         </h1>
 
@@ -66,8 +66,8 @@ function ConfirmationContent() {
           assessment has been recorded for Dr. Johnson's coastal celebration expedition.
         </p>
 
-        <div className="border-l-4 p-6 mb-10 rounded-r-lg" style={{ backgroundColor: '#F3E9D2', borderLeftColor: '#05324F' }}>
-          <p className="text-sm font-bold mb-3 uppercase tracking-wider" style={{ color: '#05324F' }}>Your Expedition ID</p>
+        <div className="border-l-4 p-6 mb-10 rounded-r-lg" style={{ backgroundColor: '#F9F7F4', borderLeftColor: '#62B6CB' }}>
+          <p className="text-sm font-bold mb-3 uppercase tracking-wider" style={{ color: '#0A2E4D' }}>Your Expedition ID</p>
           {uniqueId && (
             <>
               <code className="text-base font-mono bg-white px-4 py-3 inline-block border border-gray-300 rounded">
@@ -83,9 +83,9 @@ function ConfirmationContent() {
         <button
           onClick={() => window.location.href = '/'}
           className="px-10 py-4 text-white font-semibold uppercase tracking-wide transition-all rounded-md shadow-lg hover:shadow-xl"
-          style={{ backgroundColor: '#05324F' }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#03243A'}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#05324F'}
+          style={{ backgroundColor: '#0A2E4D' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#1B4965'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#0A2E4D'}
         >
           Complete
         </button>

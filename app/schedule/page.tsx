@@ -171,12 +171,12 @@ function ScheduleContent() {
 
   return (
     <div className="min-h-screen py-8 px-4">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-3xl mx-auto">
 
         {/* Header */}
-        <div className="bg-white border-t-8 p-10 mb-8 text-center rounded-lg shadow-lg" style={{ borderTopColor: '#05324F' }}>
+        <div className="bg-white border-t-8 p-10 mb-8 text-center rounded-lg shadow-lg" style={{ borderTopColor: '#0A2E4D' }}>
           <div className="text-4xl mb-4">🌊</div>
-          <h1 className="font-serif text-4xl mb-3" style={{ color: '#05324F' }}>
+          <h1 className="font-serif text-4xl mb-3" style={{ color: '#0A2E4D' }}>
             Expedition Availability Assessment
           </h1>
           <p className="text-xl text-gray-700 mb-2">
@@ -188,13 +188,13 @@ function ScheduleContent() {
           </p>
         </div>
 
-        {/* Progress bar - thin and elegant */}
-        <div className="bg-white p-6 mb-8 rounded-lg shadow-md border-l-4" style={{ borderLeftColor: '#B7E3E0' }}>
+        {/* Progress bar */}
+        <div className="bg-white p-6 mb-8 rounded-lg shadow-md border-l-4" style={{ borderLeftColor: '#62B6CB' }}>
           <div className="flex justify-between items-center mb-3">
             <span className="text-gray-700 font-medium">
-              <span className="text-2xl font-bold" style={{ color: '#05324F' }}>{completedDates}</span> of {totalDates} dates assessed
+              <span className="text-2xl font-bold" style={{ color: '#0A2E4D' }}>{completedDates}</span> of {totalDates} dates assessed
             </span>
-            <span className="text-sm font-semibold px-3 py-1 rounded-full" style={{ backgroundColor: '#F3E9D2', color: '#05324F' }}>
+            <span className="text-sm font-semibold px-3 py-1 rounded-full" style={{ backgroundColor: '#F9D949', color: '#0A2E4D' }}>
               {Math.round((completedDates/totalDates)*100)}%
             </span>
           </div>
@@ -203,7 +203,7 @@ function ScheduleContent() {
               className="h-3 rounded-full transition-all duration-500 ease-out"
               style={{
                 width: `${(completedDates/totalDates)*100}%`,
-                background: 'linear-gradient(90deg, #05324F 0%, #B7E3E0 100%)'
+                background: 'linear-gradient(90deg, #0A2E4D 0%, #62B6CB 100%)'
               }}
             ></div>
           </div>
@@ -231,17 +231,17 @@ function ScheduleContent() {
               disabled={saving || completedDates !== totalDates}
               className="w-full max-w-md h-16 text-lg font-semibold tracking-wide uppercase transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-md shadow-lg hover:shadow-xl"
               style={{
-                backgroundColor: completedDates === totalDates ? '#05324F' : '#D1D5DB',
+                backgroundColor: completedDates === totalDates ? '#0A2E4D' : '#D1D5DB',
                 color: completedDates === totalDates ? '#FFFFFF' : '#6B7280'
               }}
               onMouseEnter={(e) => {
                 if (completedDates === totalDates && !saving) {
-                  e.currentTarget.style.backgroundColor = '#03243A';
+                  e.currentTarget.style.backgroundColor = '#1B4965';
                 }
               }}
               onMouseLeave={(e) => {
                 if (completedDates === totalDates && !saving) {
-                  e.currentTarget.style.backgroundColor = '#05324F';
+                  e.currentTarget.style.backgroundColor = '#0A2E4D';
                 }
               }}
             >
