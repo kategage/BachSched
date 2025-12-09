@@ -15,7 +15,7 @@ export default function CalendarGrid({
 
   return (
     <div className="space-y-4">
-      {dates.map((date) => {
+      {dates.map((date, index) => {
         const dateKey = getDateKey(date);
         const displayDate = formatDisplayDate(date);
         const selectedChoice = availability[dateKey];
@@ -23,112 +23,136 @@ export default function CalendarGrid({
         // Split display date into day and date
         const [dayOfWeek, monthDay] = displayDate.split(', ');
 
+        // Alternating backgrounds
+        const bgColor = index % 2 === 0 ? '#FFFFFF' : '#F3E9D2';
+
         return (
-          <div key={dateKey} className="bg-white p-6 border-l-4 border-gray-200">
-            {/* Date header */}
+          <div
+            key={dateKey}
+            className="p-6 rounded-lg shadow-sm transition-all hover:shadow-md"
+            style={{ backgroundColor: bgColor }}
+          >
+            {/* Date header with assessed badge */}
             <div className="flex justify-between items-start mb-4">
               <div>
-                <h3 className="text-xl font-serif font-bold" style={{ color: '#0A2E4D' }}>
+                <h3 className="text-xl font-serif font-bold" style={{ color: '#05324F' }}>
                   {dayOfWeek}
                 </h3>
-                <p className="text-gray-600">{monthDay}</p>
+                <p className="text-gray-600 text-sm">{monthDay}</p>
               </div>
               {selectedChoice && (
-                <span className="text-xs px-3 py-1 font-semibold" style={{ backgroundColor: '#F9D949' }}>
-                  ASSESSED
+                <span
+                  className="text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wide"
+                  style={{
+                    backgroundColor: '#E3A534',
+                    color: '#05324F'
+                  }}
+                >
+                  ✓ Assessed
                 </span>
               )}
             </div>
 
-            {/* TIDE CHART VISUALIZATION */}
-            <div className="relative h-40 bg-gradient-to-b from-gray-50 to-gray-100 rounded-lg overflow-hidden">
-              {/* Tide level markers (background) */}
-              <div className="absolute inset-0 flex flex-col justify-between p-4 pointer-events-none">
-                <div className="text-xs text-gray-400 font-semibold">HIGH TIDE</div>
-                <div className="text-xs text-gray-400 font-semibold">MID TIDE</div>
-                <div className="text-xs text-gray-400 font-semibold">LOW TIDE</div>
-              </div>
+            {/* Horizontal pill buttons for tide levels */}
+            <div className="flex gap-3 flex-wrap">
+              {/* HIGH TIDE - Available */}
+              <button
+                type="button"
+                onClick={() => onStatusChange(dateKey, 'yes')}
+                className="flex-1 min-w-[140px] py-3 px-5 rounded-full font-semibold text-sm transition-all duration-200"
+                style={{
+                  backgroundColor: selectedChoice === 'yes' ? '#05324F' : '#FFFFFF',
+                  color: selectedChoice === 'yes' ? '#FFFFFF' : '#05324F',
+                  border: selectedChoice === 'yes' ? '2px solid #05324F' : '2px solid #05324F',
+                  boxShadow: selectedChoice === 'yes' ? '0 4px 6px -1px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(183, 227, 224, 0.5)' : 'none'
+                }}
+                onMouseEnter={(e) => {
+                  if (selectedChoice !== 'yes') {
+                    e.currentTarget.style.backgroundColor = '#B7E3E0';
+                    e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedChoice !== 'yes') {
+                    e.currentTarget.style.backgroundColor = '#FFFFFF';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }
+                }}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <span>🌊</span>
+                  <div className="text-left">
+                    <div className="font-bold">High Tide</div>
+                    <div className="text-xs opacity-75">Fully on deck</div>
+                  </div>
+                </div>
+              </button>
 
-              {/* Interactive tide buttons */}
-              <div className="relative h-full flex flex-col justify-between p-2">
-                {/* HIGH TIDE - Available (YES) */}
-                <button
-                  type="button"
-                  onClick={() => onStatusChange(dateKey, 'yes')}
-                  className="h-1/3 transition-all duration-300 flex items-center justify-center font-semibold"
-                  style={{
-                    backgroundColor: selectedChoice === 'yes' ? '#0A2E4D' : 'rgba(255, 255, 255, 0.5)',
-                    color: selectedChoice === 'yes' ? '#FFFFFF' : '#374151',
-                    border: selectedChoice === 'yes' ? '4px solid #F9D949' : '2px solid #D1D5DB',
-                    transform: selectedChoice === 'yes' ? 'scale(1.05)' : 'scale(1)',
-                    boxShadow: selectedChoice === 'yes' ? '0 10px 15px -3px rgba(0, 0, 0, 0.1)' : 'none'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (selectedChoice !== 'yes') {
-                      e.currentTarget.style.backgroundColor = 'rgba(10, 46, 77, 0.1)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (selectedChoice !== 'yes') {
-                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-                    }
-                  }}
-                >
-                  {selectedChoice === 'yes' ? '🌊 HIGH TIDE - Available' : 'Available'}
-                </button>
+              {/* MID TIDE - Possible */}
+              <button
+                type="button"
+                onClick={() => onStatusChange(dateKey, 'maybe')}
+                className="flex-1 min-w-[140px] py-3 px-5 rounded-full font-semibold text-sm transition-all duration-200"
+                style={{
+                  backgroundColor: selectedChoice === 'maybe' ? '#F7E7A0' : '#FFFFFF',
+                  color: '#05324F',
+                  border: '2px solid #05324F',
+                  boxShadow: selectedChoice === 'maybe' ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none'
+                }}
+                onMouseEnter={(e) => {
+                  if (selectedChoice !== 'maybe') {
+                    e.currentTarget.style.backgroundColor = '#FFF4CC';
+                    e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedChoice !== 'maybe') {
+                    e.currentTarget.style.backgroundColor = '#FFFFFF';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }
+                }}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <span>〰️</span>
+                  <div className="text-left">
+                    <div className="font-bold">Mid Tide</div>
+                    <div className="text-xs opacity-75">Possibly afloat</div>
+                  </div>
+                </div>
+              </button>
 
-                {/* MID TIDE - Possible (MAYBE) */}
-                <button
-                  type="button"
-                  onClick={() => onStatusChange(dateKey, 'maybe')}
-                  className="h-1/3 transition-all duration-300 flex items-center justify-center font-semibold"
-                  style={{
-                    backgroundColor: selectedChoice === 'maybe' ? '#F9D949' : 'rgba(255, 255, 255, 0.5)',
-                    color: selectedChoice === 'maybe' ? '#111827' : '#374151',
-                    border: selectedChoice === 'maybe' ? '4px solid #0A2E4D' : '2px solid #D1D5DB',
-                    transform: selectedChoice === 'maybe' ? 'scale(1.05)' : 'scale(1)',
-                    boxShadow: selectedChoice === 'maybe' ? '0 10px 15px -3px rgba(0, 0, 0, 0.1)' : 'none'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (selectedChoice !== 'maybe') {
-                      e.currentTarget.style.backgroundColor = 'rgba(249, 217, 73, 0.2)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (selectedChoice !== 'maybe') {
-                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-                    }
-                  }}
-                >
-                  {selectedChoice === 'maybe' ? '〰️ MID TIDE - Possible' : 'Possible'}
-                </button>
-
-                {/* LOW TIDE - Unavailable (NO) */}
-                <button
-                  type="button"
-                  onClick={() => onStatusChange(dateKey, 'no')}
-                  className="h-1/3 transition-all duration-300 flex items-center justify-center font-semibold"
-                  style={{
-                    backgroundColor: selectedChoice === 'no' ? '#9CA3AF' : 'rgba(255, 255, 255, 0.5)',
-                    color: selectedChoice === 'no' ? '#FFFFFF' : '#374151',
-                    border: selectedChoice === 'no' ? '4px solid #6B7280' : '2px solid #D1D5DB',
-                    transform: selectedChoice === 'no' ? 'scale(1.05)' : 'scale(1)',
-                    boxShadow: selectedChoice === 'no' ? '0 10px 15px -3px rgba(0, 0, 0, 0.1)' : 'none'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (selectedChoice !== 'no') {
-                      e.currentTarget.style.backgroundColor = 'rgba(156, 163, 175, 0.2)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (selectedChoice !== 'no') {
-                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-                    }
-                  }}
-                >
-                  {selectedChoice === 'no' ? '○ LOW TIDE - Unavailable' : 'Unavailable'}
-                </button>
-              </div>
+              {/* LOW TIDE - Unavailable */}
+              <button
+                type="button"
+                onClick={() => onStatusChange(dateKey, 'no')}
+                className="flex-1 min-w-[140px] py-3 px-5 rounded-full font-semibold text-sm transition-all duration-200"
+                style={{
+                  backgroundColor: selectedChoice === 'no' ? '#E5E5E5' : '#FFFFFF',
+                  color: selectedChoice === 'no' ? '#6B7280' : '#05324F',
+                  border: '2px solid #05324F',
+                  boxShadow: selectedChoice === 'no' ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none'
+                }}
+                onMouseEnter={(e) => {
+                  if (selectedChoice !== 'no') {
+                    e.currentTarget.style.backgroundColor = '#F3F4F6';
+                    e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedChoice !== 'no') {
+                    e.currentTarget.style.backgroundColor = '#FFFFFF';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }
+                }}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <span>○</span>
+                  <div className="text-left">
+                    <div className="font-bold">Low Tide</div>
+                    <div className="text-xs opacity-75">Washed ashore</div>
+                  </div>
+                </div>
+              </button>
             </div>
           </div>
         );

@@ -53,27 +53,27 @@ function ConfirmationContent() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-8">
-      <div className="bg-white p-12 max-w-2xl w-full border-t-8 text-center" style={{ borderTopColor: '#F9D949' }}>
+      <div className="bg-white p-12 max-w-2xl w-full border-t-8 text-center rounded-lg shadow-2xl" style={{ borderTopColor: '#B7E3E0' }}>
 
-        <div className="text-6xl mb-6">✓</div>
+        <div className="text-7xl mb-6">✓</div>
 
-        <h1 className="font-serif text-3xl mb-4" style={{ color: '#0A2E4D' }}>
+        <h1 className="font-serif text-4xl mb-4" style={{ color: '#05324F' }}>
           Expedition Application Submitted
         </h1>
 
-        <p className="text-lg text-gray-700 mb-6">
+        <p className="text-xl text-gray-700 mb-8">
           Thank you, <span className="font-semibold">{participant?.name}</span>. Your availability
           assessment has been recorded for Dr. Johnson's coastal celebration expedition.
         </p>
 
-        <div className="border-l-4 p-6 mb-8" style={{ backgroundColor: '#F9F7F4', borderLeftColor: '#0A2E4D' }}>
-          <p className="text-sm font-semibold mb-2" style={{ color: '#0A2E4D' }}>YOUR EXPEDITION ID</p>
+        <div className="border-l-4 p-6 mb-10 rounded-r-lg" style={{ backgroundColor: '#F3E9D2', borderLeftColor: '#05324F' }}>
+          <p className="text-sm font-bold mb-3 uppercase tracking-wider" style={{ color: '#05324F' }}>Your Expedition ID</p>
           {uniqueId && (
             <>
-              <code className="text-lg font-mono bg-white px-4 py-2 inline-block">
+              <code className="text-base font-mono bg-white px-4 py-3 inline-block border border-gray-300 rounded">
                 {typeof window !== 'undefined' && `${window.location.origin}/schedule?id=${uniqueId}`}
               </code>
-              <p className="text-sm text-gray-600 mt-3">
+              <p className="text-sm text-gray-600 mt-4 italic">
                 Save this link to update your availability if needed
               </p>
             </>
@@ -82,15 +82,15 @@ function ConfirmationContent() {
 
         <button
           onClick={() => window.location.href = '/'}
-          className="px-8 py-3 text-white font-semibold uppercase transition-all"
-          style={{ backgroundColor: '#0A2E4D' }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#000000'}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#0A2E4D'}
+          className="px-10 py-4 text-white font-semibold uppercase tracking-wide transition-all rounded-md shadow-lg hover:shadow-xl"
+          style={{ backgroundColor: '#05324F' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#03243A'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#05324F'}
         >
           Complete
         </button>
 
-        <div className="mt-8 text-sm text-gray-500">
+        <div className="mt-10 text-sm text-gray-500 italic">
           <p>🌊 Looking forward to the expedition</p>
         </div>
 
