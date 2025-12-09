@@ -5,11 +5,12 @@
 @tailwind utilities;
 
 :root {
-  --primary-teal: #06B6D4;
-  --secondary-coral: #FB923C;
+  --primary-teal: #14B8A6;
+  --secondary-coral: #FB7185;
+  --tropical-yellow: #FCD34D;
   --text-dark: #1F2937;
   --text-light: #6B7280;
-  --background: #F8FCFF;
+  --background: #FFF9F0;
   --card-background: #FFFFFF;
 }
 
