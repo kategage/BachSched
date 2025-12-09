@@ -3,10 +3,11 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase, type Participant, type Availability } from '@/lib/supabase';
-import CalendarGrid from '@/components/CalendarGrid';
-import CrewDashboard from '@/components/CrewDashboard';
-import TideKey from '@/components/TideKey';
-import { getAllDates, getDateKey } from '@/lib/dates';
+import CrewSummaryPanel from '@/components/CrewSummaryPanel';
+import DateCard from '@/components/DateCard';
+import { getAllDates, getDateKey, formatDisplayDate } from '@/lib/dates';
+
+type FilterType = 'all' | 'high' | 'mid' | 'unassessed';
 
 function ScheduleContent() {
   const searchParams = useSearchParams();
@@ -20,6 +21,8 @@ function ScheduleContent() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [showTideInfo, setShowTideInfo] = useState(true);
+  const [filter, setFilter] = useState<FilterType>('all');
 
   useEffect(() => {
     if (!uniqueId) {
@@ -146,13 +149,13 @@ function ScheduleContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center animate-fade-in">
           <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#0A2E4D' }} viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          <p className="text-black font-semibold">Loading your assessment...</p>
+          <p className="text-slate-700 font-semibold">Loading your assessment...</p>
         </div>
       </div>
     );
@@ -160,108 +163,129 @@ function ScheduleContent() {
 
   if (!participant) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center">
-          <p className="text-black font-semibold">Participant not found</p>
+          <p className="text-slate-700 font-semibold">Participant not found</p>
         </div>
       </div>
     );
   }
 
+  const dates = getAllDates();
   const completedDates = Object.keys(availability).length;
-  const totalDates = getAllDates().length;
+  const totalDates = dates.length;
+
+  // Filter dates based on selected filter
+  const filteredDates = dates.filter(date => {
+    const dateKey = getDateKey(date);
+    const selectedChoice = availability[dateKey];
+
+    if (filter === 'all') return true;
+    if (filter === 'high') return selectedChoice === 'yes';
+    if (filter === 'mid') return selectedChoice === 'maybe';
+    if (filter === 'unassessed') return !selectedChoice;
+    return true;
+  });
 
   return (
-    <div className="min-h-screen py-8 px-4 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
-        {/* Page header - left aligned */}
-        <div className="mb-6">
-          <h1 className="text-3xl font-serif font-bold mb-2" style={{ color: '#0A2E4D' }}>
-            Expedition Availability Assessment
-          </h1>
-          <p className="text-sm text-gray-600">
-            Expedition Portal • Crew Availability Assessment
-          </p>
+    <div className="min-h-screen py-8 px-4 bg-slate-50">
+      <div className="max-w-4xl mx-auto">
+        {/* Crew Summary Panel */}
+        <CrewSummaryPanel
+          crewMemberName={participant.name}
+          datesAssessed={completedDates}
+          totalDates={totalDates}
+          filterType={filter}
+          onFilterChange={setFilter}
+        />
+
+        {/* Field Conditions toggle */}
+        <div className="mb-6 flex justify-end">
+          <button
+            type="button"
+            onClick={() => setShowTideInfo(!showTideInfo)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all shadow-sm ${
+              showTideInfo
+                ? 'bg-sky-100 border-2 hover:bg-sky-200'
+                : 'bg-white border-2 border-slate-300 hover:border-slate-400'
+            }`}
+            style={{
+              borderColor: showTideInfo ? '#62B6CB' : undefined,
+              color: '#0A2E4D'
+            }}
+          >
+            <span className="text-sm">{showTideInfo ? '▼' : '▶'}</span>
+            <span>Field Conditions</span>
+          </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Main content area */}
-          <div className="lg:col-span-2">
-            {/* Crew Dashboard */}
-            <CrewDashboard
-              crewMemberName={participant.name}
-              datesAssessed={completedDates}
-              totalDates={totalDates}
-            />
+        {/* Date Cards */}
+        <form onSubmit={handleSubmit}>
+          <div className="space-y-4 mb-6">
+            {filteredDates.map((date, index) => {
+              const dateKey = getDateKey(date);
+              const displayDate = formatDisplayDate(date);
+              const [dayOfWeek, monthDay] = displayDate.split(', ');
+              const selectedChoice = availability[dateKey];
 
-            {/* Availability Grid */}
-            <form onSubmit={handleSubmit}>
-              <div className="mb-6">
-                <CalendarGrid
-                  availability={availability}
-                  onStatusChange={handleStatusChange}
+              return (
+                <DateCard
+                  key={dateKey}
+                  date={date}
+                  dateKey={dateKey}
+                  dayOfWeek={dayOfWeek}
+                  monthDay={monthDay}
+                  fieldDayNumber={index + 1}
+                  selectedChoice={selectedChoice}
+                  onStatusChange={(status) => handleStatusChange(dateKey, status)}
+                  showTideInfo={showTideInfo}
                 />
-              </div>
-
-              {error && (
-                <div className="bg-red-50 border-l-4 border-red-600 text-red-700 px-5 py-4 mb-6 rounded-xl">
-                  {error}
-                </div>
-              )}
-
-              {/* Submit button */}
-              <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 text-center">
-                <button
-                  type="submit"
-                  disabled={saving || completedDates !== totalDates}
-                  className="w-full max-w-md h-14 text-base font-semibold tracking-wide uppercase transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-lg shadow-md hover:shadow-lg"
-                  style={{
-                    backgroundColor: completedDates === totalDates ? '#0A2E4D' : '#D1D5DB',
-                    color: completedDates === totalDates ? '#FFFFFF' : '#6B7280'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (completedDates === totalDates && !saving) {
-                      e.currentTarget.style.backgroundColor = '#1B4965';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (completedDates === totalDates && !saving) {
-                      e.currentTarget.style.backgroundColor = '#0A2E4D';
-                    }
-                  }}
-                >
-                  {saving ? 'Submitting Assessment...' : 'Submit Expedition Application →'}
-                </button>
-                {completedDates !== totalDates && (
-                  <p className="text-xs text-gray-600 mt-3">
-                    Please assess all {totalDates - completedDates} remaining dates to continue
-                  </p>
-                )}
-              </div>
-            </form>
+              );
+            })}
           </div>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-8">
-              <TideKey />
-
-              {/* Additional info card */}
-              <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-5">
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-3" style={{ color: '#0A2E4D' }}>
-                  About This Assessment
-                </h3>
-                <p className="text-xs text-gray-600 leading-relaxed mb-3">
-                  We're glad you're considering joining the crew. We'll use this information to inform our final dates.
-                </p>
-                <p className="text-xs text-gray-600 leading-relaxed">
-                  Tide times are based on NOAA predictions for Port Maria, Jamaica.
-                  Use the filters to view specific availability categories.
-                </p>
-              </div>
+          {filteredDates.length === 0 && (
+            <div className="text-center py-12 text-slate-500">
+              <p className="text-sm">No dates match the selected filter.</p>
             </div>
+          )}
+
+          {error && (
+            <div className="bg-red-50 border-l-4 border-red-600 text-red-700 px-5 py-4 mb-6 rounded-xl">
+              {error}
+            </div>
+          )}
+
+          {/* Submit button */}
+          <div className="rounded-2xl bg-white shadow-sm border border-slate-200 p-6 text-center">
+            <button
+              type="submit"
+              disabled={saving || completedDates !== totalDates}
+              className="w-full max-w-md h-14 text-base font-bold tracking-wide uppercase transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-lg shadow-md hover:shadow-lg"
+              style={{
+                backgroundColor: completedDates === totalDates ? '#0A2E4D' : '#D1D5DB',
+                color: completedDates === totalDates ? '#FFFFFF' : '#6B7280'
+              }}
+              onMouseEnter={(e) => {
+                if (completedDates === totalDates && !saving) {
+                  e.currentTarget.style.backgroundColor = '#1B4965';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (completedDates === totalDates && !saving) {
+                  e.currentTarget.style.backgroundColor = '#0A2E4D';
+                }
+              }}
+            >
+              {saving ? 'Submitting Assessment...' : 'Submit Expedition Application →'}
+            </button>
+            {completedDates !== totalDates && (
+              <p className="text-xs text-slate-600 mt-3">
+                Please assess all {totalDates - completedDates} remaining dates to continue
+              </p>
+            )}
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
@@ -271,13 +295,13 @@ export default function SchedulePage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-screen flex items-center justify-center bg-slate-50">
           <div className="text-center animate-fade-in">
             <svg className="animate-spin h-8 w-8 mx-auto mb-4" style={{ color: '#0A2E4D' }} viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <p className="text-black font-semibold">Loading...</p>
+            <p className="text-slate-700 font-semibold">Loading...</p>
           </div>
         </div>
       }

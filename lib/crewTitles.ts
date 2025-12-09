@@ -1,4 +1,4 @@
-// Crew title assignment system
+// Crew title assignment system - FRONT-END ONLY
 // Deterministically assigns ocean-expedition themed titles based on crew member name
 
 export const CREW_TITLES = [
@@ -26,27 +26,18 @@ export const CREW_TITLES = [
 
 /**
  * Deterministically assigns a crew title based on the crew member's name.
- * Uses a simple hash function to convert the name to an index.
- * The same name will always get the same title, ensuring consistency.
- *
- * @param name - The crew member's name
- * @returns A crew title from the CREW_TITLES array
+ * Uses simple hash function to ensure the same name always gets the same title.
+ * NO backend modifications required - this is purely front-end.
  */
 export function getCrewTitleForName(name: string): string {
   if (!name || name.trim().length === 0) {
     return "Awaiting Assignment";
   }
 
-  // Simple hash function: sum character codes
   let hash = 0;
-  const normalizedName = name.toLowerCase().trim();
-
-  for (let i = 0; i < normalizedName.length; i++) {
-    hash += normalizedName.charCodeAt(i);
+  for (let i = 0; i < name.length; i++) {
+    hash = (hash + name.charCodeAt(i)) % CREW_TITLES.length;
   }
 
-  // Use modulo to get an index within the array bounds
-  const index = hash % CREW_TITLES.length;
-
-  return CREW_TITLES[index];
+  return CREW_TITLES[hash];
 }
