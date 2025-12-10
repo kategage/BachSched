@@ -69,6 +69,61 @@ function ConfirmationContent() {
           assessment has been recorded for Dr. Johnson's coastal celebration expedition.
         </p>
 
+        {/* Venn Diagram - Sweet Spot */}
+        <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-lg p-8 mb-6">
+          <h3 className="text-center font-bold text-xl mb-6 text-green-900">
+            ✓ You've Found Your Sweet Spot!
+          </h3>
+
+          <div className="max-w-sm mx-auto mb-6">
+            <svg viewBox="0 0 300 300" className="w-full">
+              {/* Three overlapping circles */}
+              <circle cx="150" cy="120" r="75" fill="#10B981" opacity="0.4"/>
+              <circle cx="110" cy="180" r="75" fill="#3B82F6" opacity="0.4"/>
+              <circle cx="190" cy="180" r="75" fill="#F59E0B" opacity="0.4"/>
+
+              {/* Labels */}
+              <text x="150" y="60" fill="#047857" fontSize="12" fontWeight="bold" textAnchor="middle">
+                Celebrating
+              </text>
+              <text x="150" y="75" fill="#047857" fontSize="12" fontWeight="bold" textAnchor="middle">
+                Ayana
+              </text>
+
+              <text x="60" y="220" fill="#1e40af" fontSize="12" fontWeight="bold" textAnchor="middle">
+                Ocean
+              </text>
+              <text x="60" y="235" fill="#1e40af" fontSize="12" fontWeight="bold" textAnchor="middle">
+                Time
+              </text>
+
+              <text x="240" y="220" fill="#b45309" fontSize="12" fontWeight="bold" textAnchor="middle">
+                Being a
+              </text>
+              <text x="240" y="235" fill="#b45309" fontSize="12" fontWeight="bold" textAnchor="middle">
+                Good Friend
+              </text>
+
+              {/* Center star */}
+              <text x="150" y="165" fontSize="40" textAnchor="middle">⭐</text>
+              <text x="150" y="195" fill="#047857" fontSize="14" fontWeight="bold" textAnchor="middle">
+                You're Here!
+              </text>
+            </svg>
+          </div>
+
+          <p className="text-center text-sm text-gray-700 leading-relaxed">
+            By submitting your availability, you've positioned yourself at the intersection
+            of <strong>ocean celebration</strong>, <strong>friendship</strong>, and
+            <strong>honoring Dr. Johnson</strong>. This is the sweet spot.
+          </p>
+
+          <p className="text-center text-xs text-gray-500 mt-4 italic">
+            "What can I do to help celebrate my friend? Get to the heart of your celebration Venn!"
+            <br/>— Definitely something Ayana would say
+          </p>
+        </div>
+
         <div className="border-l-4 p-5 mb-8 rounded-r-lg" style={{ backgroundColor: '#F9F7F4', borderLeftColor: '#62B6CB' }}>
           <p className="text-xs font-bold mb-3 uppercase tracking-wider" style={{ color: '#0A2E4D' }}>Your Expedition ID</p>
           {uniqueId && (
